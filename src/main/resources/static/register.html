@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>Bootstrap 101 Template</title>
+
+	<link href="./lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+	<script src="./lib/bootstrap/js/jquery-3.5.1.min.js"></script>
+
+	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+	<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- 消息提示插件 -->
+	<link rel="stylesheet" href="./lib/toastr/toastr.min.css">
+
+	<link rel="stylesheet" type="text/css" href="./lib/private/private.css" />
+	<style>
+		h5 {
+			font-weight: 600;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="position: relative;">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb" style="margin-bottom: 0px;">
+				<li class="breadcrumb-item"><a href="#">首页</a></li>
+				<li class="breadcrumb-item"><a href="#">挂号收费</a></li>
+				<li class="breadcrumb-item active" aria-current="page">现场挂号</li>
+			</ol>
+		</nav>
+	</div>
+		<div class="form-inline" style="margin-top: 20px;margin-left: 10px;margin-bottom: 20px;">
+			<div class="inputgroup">
+				<div class="form-group col-md-3">
+					<label for="exampleInputName2">发票号：</label>
+					<input type="text" class="form-control" id="exampleInputName2" placeholder="发票号">
+				</div>
+				<button id="registerbtn" class="btn btn-primary">挂号</button>
+				<button class="btn btn-primary">清空</button>
+			</div>
+			<h4 style="margin-left: 1.2%;">挂号信息:</h4>
+			<div class="inputgroup">
+				<div class="form-group col-md-3">
+					<label for="exampleInputName1">病历号：</label>
+					<input type="text" class="form-control" id="exampleInputName1" placeholder="病历号">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName3">姓名：</label>
+					<input type="text" class="form-control" id="exampleInputName3" placeholder="姓名">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName4">性别：</label>
+					<input type="text" class="form-control" id="exampleInputName4" placeholder="性别">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName5">身份证号：</label>
+					<input type="text" class="form-control" id="exampleInputName5" placeholder="身份证号">
+				</div>
+			</div>
+			<div class="inputgroup">
+				<div class="form-group col-md-3">
+					<label for="exampleInputName6">家庭住址：</label>
+					<input type="text" class="form-control" id="exampleInputName6" placeholder="家庭住址">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName7">出生日期：</label>
+					<input type="date" class="form-control" id="exampleInputName7">
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="exampleInputName8">看诊日期：</label>
+					<input type="date" class="form-control" id="exampleInputName8">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName9">午别：</label>
+					<select class="form-control" id="exampleInputName9">
+						<option>上午</option>
+						<option>下午</option>
+					</select>
+				</div>
+			</div>
+			<div class="inputgroup">
+				<div class="form-group col-md-3">
+					<label for="exampleInputName10">结算类别：</label>
+					<select class="form-control" id="exampleInputName10">
+						<option>自费</option>
+						<option>医疗保险</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName11">挂号科室：</label>
+					<select class="form-control" id="exampleInputName11">
+						<option>外科</option>
+						<option>心血管</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName12">号别：</label>
+					<select class="form-control" id="exampleInputName12">
+						<option>专家号</option>
+						<option>普通号</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName13">看诊医生：</label>
+					<select class="form-control" id="exampleInputName13">
+						<option>扁鹊</option>
+						<option>华佗</option>
+					</select>
+				</div>
+			</div>
+			<div class="inputgroup">
+				<div class="form-group col-md-3">
+					<label for="exampleInputName14">初始号额：</label>
+					<input type="date" class="form-control" id="exampleInputName14" placeholder="初始号额">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputName15">已用号额：</label>
+					<input type="date" class="form-control" id="exampleInputName15" placeholder="已用号额">
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputNam18">收费方式：</label>
+					<select class="form-control" id="exampleInputName18">
+						<option>现金</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="exampleInputNam17">应收金额：</label>
+					<input type="text" class="form-control" id="exampleInputName17" placeholder="应收金额">
+				</div>
+			</div>
+			<div class="inputgroup">
+				<div class="form-group col-md-12">
+					<label for="exampleInputNam16">病历本：</label>
+					<input type="checkbox" name="book" class="form-control" id="exampleInputName16">
+				</div>
+			</div>
+		</div>
+</body>
+<script src="./lib/toastr/toastr.min.js"></script>
+
+<script>
+	toastr.options = {
+		"closeButton": true,
+		"debug": false,
+		"newestOnTop": false,
+		"progressBar": false,
+		"positionClass": "toast-top-center",
+		"preventDuplicates": false,
+		"onclick": null,
+		"showDuration": "300",
+		"hideDuration": "1000",
+		"timeOut": "2000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	}
+
+	$("#registerbtn").click(function () {
+		toastr["success"]("挂号成功!")
+	})
+
+</script>
+
+</html>

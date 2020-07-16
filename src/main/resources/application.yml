@@ -1,0 +1,13 @@
+#数据库连接信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/hishospital
+    password: root
+    username: root
+
+#配置mybatis信息
+
+mybatis:
+  type-aliases-package: com.hospital.domain
+  mapper-locations: classpath:mapper/*.xml

@@ -1,0 +1,62 @@
+.inputgroup {
+	height: 50px;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+#diagnose-window {
+	margin-left: 1%;
+	overflow: auto;
+}
+
+#left-part {
+	float: left;
+	width: 25%;
+	margin-top: 20px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #ddd;
+	border-width: 1px;
+	border-radius: 4px 4px 0 0;
+}
+
+#right-part {
+	float: right;
+	width: 74%;
+	margin-top: 20px;
+	overflow: auto;
+}
+
+#left-up-part {
+	position: relative;
+	font-size: 20px;
+	line-height: 35px;
+}
+
+#left-up-part a {
+	position: absolute;
+	right: 7px;
+}
+#left-middle-part{
+	margin-right: 5px;
+}
+
+#left-middle-part>form>button {
+	position: absolute;
+	left: 25%;
+	transform: translate(-109%, 0);
+}
+#left-down-part{
+	margin: 0px 20px 0px;
+}
+
+#left-down-part>p {
+	border-radius: 4px 4px 4px 4px;
+	font-size: 15px;
+	line-height: 25px;
+	margin-top: 10px;
+}
+
+#left-down-part>table {
+	width: 100%;
+}
