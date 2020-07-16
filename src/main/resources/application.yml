@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/hishospital
+    url: jdbc:mysql://127.0.0.1:3306/hishospital?serverTimezone=UTC&characterEncoding=utf-8
     password: root
     username: root
 

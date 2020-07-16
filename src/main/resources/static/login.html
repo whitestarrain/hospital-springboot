@@ -14,6 +14,7 @@
 		<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./lib/private/public.css" />
 
+
 		<style>
 			.vertical-center {
                 position: absolute;
@@ -24,25 +25,25 @@
         </style>
 	</head>
 	<body>
-		<div class="container vertical-center shadow" style="width: 450px; padding: 10px 20px 10px;">
+		<div class="container vertical-center shadow" style="width: 450px; padding: 10px 20px 10px;" id="login-div">
 			<h2 style="text-align: center;">云医院登录</h2>
-			<form class="form-horizontal" method="post" style="width: 360px;">
+			<div class="form-horizontal" method="post" style="width: 360px;">
 				<div style="margin-left: 30px;">
 					<div class="form-group">
 						<label for="userid">用户名</label>
-						<input type="text" class="form-control" id="userid" placeholder="id" name="id" />
+						<input type="text" class="form-control" id="userid" placeholder="用户名" v-model="user.username" />
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">密码</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" />
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码" v-model="user.password" />
 					</div>
-					<button type="submit" class="btn btn-primary center-block btn-lg" style="margin-top: 40px;">
+					<button @click="login" class="btn btn-primary center-block btn-lg" style="margin-top: 40px;">
 						登录
 					</button>
 				</div>
-			</form>
+			</div>
 
-			<div class="alert alert-warning alert-dismissible" style="margin-top: 1.25rem;" role="alert">
+			<div v-show="flag" class="alert alert-warning alert-dismissible" style="margin-top: 1.25rem;" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -50,4 +51,39 @@
 			</div>
 		</div>
 	</body>
+	<script src="lib/vue/vue.min.js"></script>
+	<script src="lib/vue/axios.min.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: "#login-div",
+			data: {
+				flag: false,
+				user: {
+					username: "",
+					password: ""
+				}
+			},
+			methods: {
+				login: function() {
+					var _this = this;
+					/* 写成这样是因为axios发送post时传递参数，springboot接收不到 */
+					axios.post('/user/login',"userName="+_this.user.username+"&password="+_this.user.password).then(function(res) {
+						if (res.data.length === 0) {
+							_this.flag = true;
+						} else {
+							_this.flag = false;
+							var type = res.data["type"]
+							if(type===3){
+								window.location.href="doctorHome.html"
+							}else if(type===2){
+								window.location.href="registrarHome.html"
+							}else if(type===1){
+								window.location.href="index.html"
+							}
+						}
+					})
+				}
+			}
+		});
+	</script>
 </html>
