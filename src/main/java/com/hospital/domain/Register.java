@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 public class Register {
     private int id;
     private int medicalRecord;
+    private String name;
     private int gender;
     private String idNumber;
     private Date birthday;
@@ -16,7 +17,6 @@ public class Register {
     private String address;
     private Date diagDate;
     private String noon;
-    private Timestamp regiDate;
     private int depaId;
     private int doctorId;
     private int needRecord;
@@ -28,6 +28,7 @@ public class Register {
         return "Register{" +
                 "id=" + id +
                 ", medicalRecord=" + medicalRecord +
+                ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", idNumber='" + idNumber + '\'' +
                 ", birthday=" + birthday +
@@ -35,7 +36,6 @@ public class Register {
                 ", address='" + address + '\'' +
                 ", diagDate=" + diagDate +
                 ", noon='" + noon + '\'' +
-                ", regiDate=" + regiDate +
                 ", depaId=" + depaId +
                 ", doctorId=" + doctorId +
                 ", needRecord=" + needRecord +
@@ -58,6 +58,14 @@ public class Register {
 
     public void setMedicalRecord(int medicalRecord) {
         this.medicalRecord = medicalRecord;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getGender() {
@@ -114,14 +122,6 @@ public class Register {
 
     public void setNoon(String noon) {
         this.noon = noon;
-    }
-
-    public Timestamp getRegiDate() {
-        return regiDate;
-    }
-
-    public void setRegiDate(Timestamp regiDate) {
-        this.regiDate = regiDate;
     }
 
     public int getDepaId() {

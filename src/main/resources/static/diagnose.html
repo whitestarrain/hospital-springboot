@@ -116,22 +116,33 @@
 				</div>
 
 				<div id="right-down-part">
-					<iframe id="diagnoseIframe" src="MedicalRecord.html" style="height: 100%; width: 100%; border: none;"></iframe>
+					<iframe name="diagnoseIframe" id="diagnoseIframe" src="MedicalRecord.html" style="height: 100%; width: 100%; border: none;"></iframe>
 				</div>
 			</div>
 
 		</div>
 	</body>
 	<script>
-		$(function(){
-			var h=window.innerHeight
+		$(function() {
+			var h = window.innerHeight
 			$("#right-part").css({
-				height:h*0.92
+				height: h * 0.92
 			})
 			$("#right-down-part").css({
-				height:h*0.77
+				height: h * 0.77
 			})
-			
+
+		})
+		
+		$(function() {
+			/* 获取frame中的document */
+			var f = window.frames["diagnoseIframe"].document;
+			console.log(f.getElementById("document"))
+			var f2 = $("#diagnoseIframe").contents();
+			f2.find("#inputEmail3").click(function() {
+				alert(".....")
+			})
+
 		})
 	</script>
 </html>

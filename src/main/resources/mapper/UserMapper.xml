@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.hospital.mapper.IUserMapper">
-
+<mapper namespace="com.hospital.mapper.IRegisterMapper">
+    <insert id="InsertRegister" parameterType="Register">
+        <selectKey resultType="int" keyProperty="id" keyColumn="id" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        call register_p(#{idNumber},#{name},#{gender},#{birthday},#{address},#{diagDate},#{noon},#{depaId},#{doctorId},#{payWay},#{needRecord},#{registrarId})
+    </insert>
 </mapper>

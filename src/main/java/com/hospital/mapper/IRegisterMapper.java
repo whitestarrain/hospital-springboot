@@ -19,4 +19,11 @@ public interface IRegisterMapper {
      */
     @Select("select * from register where id = #{id}")
     public Register selectById(int id);
+
+    /**
+     * 调用存储过程挂号
+     * @param register 挂号信息
+     */
+    public void InsertRegister(Register register);
+
 }
