@@ -47,48 +47,24 @@
 				<div id="left-down-part">
 					<p class="bg-primary">未诊患者:</p>
 					<table class="table table-hover">
-						<tr>
-							<td>1111</td>
-							<td>1111</td>
-							<td>1111</td>
-						</tr>
-						<tr>
-							<td>1111</td>
-							<td>1111</td>
-							<td>1111</td>
-						</tr>
-						<tr>
-							<td>1111</td>
-							<td>1111</td>
-							<td>1111</td>
-						</tr>
-						<tr>
-							<td>1111</td>
-							<td>1111</td>
-							<td>1111</td>
+						<tr v-for="(r) in noDiagnosedRegister">
+							<td>{{r.medicalRecord}}</td>
+							<td>{{r.name}}</td>
+							<td>{{r.age}}</td>
+							<td style="display: none;">{{r.gender}}</td>
+							<td style="display: none;">{{r.id}}</td>
+							<td style="display: none;">{{r.status}}</td>
 						</tr>
 					</table>
 					<p class="bg-primary">已诊患者:</p>
 					<table class="table table-hover">
-						<tr>
-							<td>2222</td>
-							<td>2222</td>
-							<td>2222</td>
-						</tr>
-						<tr>
-							<td>2222</td>
-							<td>2222</td>
-							<td>2222</td>
-						</tr>
-						<tr>
-							<td>2222</td>
-							<td>2222</td>
-							<td>2222</td>
-						</tr>
-						<tr>
-							<td>2222</td>
-							<td>2222</td>
-							<td>2222</td>
+						<tr v-for="(r) in diagnosedRegister">
+							<td>{{r.medicalRecord}}</td>
+							<td>{{r.name}}</td>
+							<td>{{r.age}}</td>
+							<td style="display: none;">{{r.gender}}</td>
+							<td style="display: none;">{{r.id}}</td>
+							<td style="display: none;">{{r.status}}</td>
 						</tr>
 					</table>
 				</div>
@@ -100,7 +76,14 @@
 							隐藏患者栏
 						</button>
 					</div>
-					<span class="text-info" style="font-size: 14px; line-height: 33px;">患者姓名：XXX，病历号：XX，年龄：XX，性别：X</span>
+					<span id="register-info" class="text-info" style="font-size: 14px; line-height: 33px; display: none">
+						病历号：<span id="recordNum" style="margin-right: 10px;"></span>
+						患者姓名：<span style="margin-right: 10px;"></span>
+						年龄：<span style="margin-right: 10px;"></span>，
+						性别：<span style="margin-right: 10px;"></span>
+						挂号id:<span id="registerId"></span>
+						<span id="Selectedstatus" style="display: none;"></span>
+					</span>
 				</div>
 				<div id="right-up-part">
 					<ul class="nav nav-tabs">
@@ -116,12 +99,14 @@
 				</div>
 
 				<div id="right-down-part">
-					<iframe name="diagnoseIframe" id="diagnoseIframe" src="MedicalRecord.html" style="height: 100%; width: 100%; border: none;"></iframe>
+					<iframe name="diagnoseIframe" src="./MedicalRecord.html" style="height: 100%; width: 100%; border: none;"></iframe>
 				</div>
 			</div>
 
 		</div>
 	</body>
+	<script src="lib/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/vue/axios.min.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		$(function() {
 			var h = window.innerHeight
@@ -133,15 +118,58 @@
 			})
 
 		})
-		
+
+		new Vue({
+			el: "#left-part",
+			data: {
+				noDiagnosedRegister: [{
+					name: "test",
+					age: 11,
+					medicalRecord: 231313,
+					gender: "男",
+					id: 1,
+					status: 1
+
+				}],
+				diagnosedRegister: [{
+					name: "test",
+					age: 11,
+					medicalRecord: 231313,
+					gender: "女",
+					id: 1,
+					status: 2
+				}]
+			},
+			beforeMount: function() {
+				var _this = this;
+				axios.get("/register/getCurrentNoDiagnoseRegister").then(function(resp) {
+					_this.noDiagnosedRegister = resp.data
+				})
+				axios.get("/register/getCurrentDiagnosedRegister").then(function(resp) {
+					_this.diagnosedRegister = resp.data
+				})
+			}
+
+		})
+
 		$(function() {
-			/* 获取frame中的document */
-			var f = window.frames["diagnoseIframe"].document;
-			console.log(f.getElementById("document"))
-			var f2 = $("#diagnoseIframe").contents();
-			f2.find("#inputEmail3").click(function() {
-				alert(".....")
-			})
+			setTimeout(function() {
+				/* 点击切换右侧信息 */
+				$("#left-down-part table tr").click(function(e) {
+					$("#register-info").show()
+					$("#left-down-part table tr").removeClass("info")
+					$(this).addClass("info")
+					for (var i = 1; i <= 6; i++) {
+						var a = this.querySelector("td:nth-child(" + i + ")")
+						var b = document.querySelector("#register-info>span:nth-child(" + i + ")");
+						b.innerHTML = a.innerHTML
+					}
+					$("#diagnoseIframe").prop({
+						src: "./MedicalRecord.html"
+					})
+				})
+			}, 500)
+			/* 500毫秒给vue准备 */
 
 		})
 	</script>

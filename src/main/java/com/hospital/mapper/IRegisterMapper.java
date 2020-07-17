@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author liyu
  */
@@ -28,9 +30,24 @@ public interface IRegisterMapper {
 
     /**
      * 根据病历号获得最近挂号信息
-     * @return
+     * @param recordId  病历id
+     * @return 挂号信息
      */
     @Select(" SELECT * FROM register WHERE id =   (SELECT MAX(id) FROM register WHERE medicalrecord = #{recordId})")
     public Register getRegisterByMedicalRecord(int recordId);
 
+
+    /**
+     * 获得所有今天要诊断但未诊的挂号记录
+     * @return 今天要诊断但未诊的挂号记录
+     */
+    @Select(" SELECT * FROM register WHERE diagdate = CURDATE() AND STATUS = 1")
+    public List<Register> getCurrentNoDiagnoseRegister();
+
+    /**
+     * 获得所有今天已诊断的记录
+     * @return 获得所有今天已诊断的记录
+     */
+    @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND STATUS = 2")
+    public List<Register> getCurrentDiagnosedRegister();
 }

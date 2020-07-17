@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,5 +42,15 @@ public class RegisterController {
         }
         Register record = rs.getRegisterByMedicalRecord(recordNum);
         return record;
+    }
+
+    @RequestMapping("/getCurrentNoDiagnoseRegister")
+    public List<Register> getCurrentNoDiagnoseRegister(){
+        return rs.getCurrentNoDiagnoseRegister();
+    }
+
+    @RequestMapping("/getCurrentDiagnosedRegister")
+    public List<Register> getCurrentDiagnosedRegister(){
+        return rs.getCurrentDiagnosedRegister();
     }
 }

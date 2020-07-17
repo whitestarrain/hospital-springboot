@@ -2,6 +2,8 @@ package com.hospital.service;
 
 import com.hospital.domain.Register;
 
+import java.util.List;
+
 /**
  * @author liyu
  */
@@ -15,4 +17,8 @@ public interface IRegisterService {
 
 
     public Register getRegisterByMedicalRecord(int recordNum);
+
+    public List<Register> getCurrentNoDiagnoseRegister();
+
+    public List<Register> getCurrentDiagnosedRegister();
 }

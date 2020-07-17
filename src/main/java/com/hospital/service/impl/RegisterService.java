@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author liyu
@@ -38,5 +39,15 @@ public class RegisterService implements IRegisterService {
         invoice.setUserId(register.getRegistrarId());
         invoiceMapper.insertInvovice(invoice);
         return invoice.getNumber();
+    }
+
+    @Override
+    public List<Register> getCurrentNoDiagnoseRegister() {
+        return registerMapper.getCurrentNoDiagnoseRegister();
+    }
+
+    @Override
+    public List<Register> getCurrentDiagnosedRegister() {
+        return registerMapper.getCurrentDiagnosedRegister();
     }
 }

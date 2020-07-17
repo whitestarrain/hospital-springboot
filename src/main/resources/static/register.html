@@ -233,6 +233,7 @@
 				},
 				registerFun: function() {
 					var _this = this;
+					
 					// 从上层获取用户id
 					var a = window.parent.document.getElementById("user-id").innerText;
 					axios.get("/register/doRegister", {
@@ -260,30 +261,31 @@
 			}
 		})
 
+		/* 信息验证 */
 		$("#registerdiv input,select").blur(function() {
 			var flag = true;
 			$("#registerdiv input").each(function() {
-				console.log($(this).val())
+				// console.log($(this).val())
 				if ($(this).val() == null || $(this).val() == undefined) {
 					flag = false;
 				}
 			})
 			$("#registerdiv select").each(function() {
-				console.log($(this).val())
+				// console.log($(this).val())
 				if ($(this).val() == null || $(this).val() == undefined) {
 					console.log($(this).val())
 					flag = false;
 				}
 			})
-			console.log($("#selectdoctorid").val())
-			if($("#selectdoctorid").val()==null||$("#selectdoctorid").val()==undefined||$("#selectdoctorid").val()==0){
-				flag=false
+			// console.log($("#selectdoctorid").val())
+			if ($("#selectdoctorid").val() == null || $("#selectdoctorid").val() == undefined || $("#selectdoctorid").val() ==
+				0) {
+				flag = false
 			}
 			$("#registerbtn").prop({
 				disabled: !flag
 			})
 		})
-		
 	</script>
 
 </html>

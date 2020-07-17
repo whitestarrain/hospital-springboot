@@ -1,7 +1,9 @@
 package com.hospital.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * @author liyu
@@ -22,6 +24,7 @@ public class Register {
     private int needRecord;
     private int registrarId;
     private int status;
+    private int age;
 
     @Override
     public String toString() {
@@ -41,6 +44,7 @@ public class Register {
                 ", needRecord=" + needRecord +
                 ", registrarId=" + registrarId +
                 ", status=" + status +
+                ", age=" + age +
                 '}';
     }
 
@@ -89,7 +93,15 @@ public class Register {
     }
 
     public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+        // TODO 待删
+        this.birthday=birthday;
+        Calendar instance = Calendar.getInstance();
+        int yearNow = instance.get(Calendar.YEAR);
+        SimpleDateFormat format=new SimpleDateFormat();
+        format.applyPattern("YYYY");
+        String format1 = format.format(birthday);
+        int temp = Integer.parseInt(format1);
+        this.age=yearNow-temp;
     }
 
     public int getPayWay() {
@@ -162,5 +174,9 @@ public class Register {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

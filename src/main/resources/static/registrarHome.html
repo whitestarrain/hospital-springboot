@@ -25,8 +25,7 @@
 	</head>
 	<body style="position: relative;">
 		<header id="header">
-			<nav class="navbar navbar-inverse" style="border-radius: 0%; margin-bottom:
-				0px;">
+			<nav class="navbar navbar-inverse" style="border-radius: 0%; margin-bottom: 0px;">
 				<div id="navigationbar" class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
@@ -46,7 +45,7 @@
 							<li><a href="#">{{user.name}}</a></li>
 							<li class="dropdown">
 								<span id="user-id" style="display: none;">{{user.id}}</span>
-								<a  href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.userName}}
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.userName}}
 									<span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">操作1</a></li>
@@ -104,13 +103,12 @@
 		$(function() {
 			var d = window.innerHeight
 			$("#framediv").css({
-				height: d * 0.90
+				height: d * 0.93
 			})
 			$("header>nav").css({
 				height: d * 0.06
 			})
 		});
-		window.onload = function() {}
 
 		new Vue({
 			el: "#header",

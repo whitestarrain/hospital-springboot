@@ -1,6 +1,7 @@
 import com.hospital.HisSpringBootApplication;
 import com.hospital.domain.Register;
 import com.hospital.mapper.IInvoiceMapper;
+import com.hospital.mapper.IMedicalRecordMapper;
 import com.hospital.mapper.IRegisterMapper;
 import com.hospital.mapper.IUserMapper;
 import com.hospital.service.IRegisterService;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
+import java.util.List;
 
 
 /**
@@ -33,9 +35,11 @@ public class TestAll {
     private IInvoiceMapper invoiceMapper;
     @Test
     public void test() {
-        System.out.println(registerMapper.selectById(3));
+        Register registerByMedicalRecord = registerMapper.getRegisterByMedicalRecord(600615);
+        System.out.println(registerByMedicalRecord);
+        System.out.println(registerMapper.selectById(5));
         System.out.println("test");
-        System.out.println(iUserMapper.login("ghy", "ghy123"));
+//        System.out.println(iUserMapper.login("ghy", "ghy123"));
     }
 
     @Test
@@ -64,4 +68,15 @@ public class TestAll {
         System.out.println(aa);
     }
 
+    @Test
+    public void test4(){
+        List<Register> temp = registerMapper.getCurrentNoDiagnoseRegister();
+        System.out.println(temp);
+    }
+    @Autowired
+    private IMedicalRecordMapper iMedicalRecordMapper;
+    @Test
+    public void test5(){
+        System.out.println(iMedicalRecordMapper.getMedicalRecordByNum(600601));
+    }
 }
