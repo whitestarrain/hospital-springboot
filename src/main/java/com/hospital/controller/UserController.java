@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * @author liyu
@@ -43,6 +45,16 @@ public class UserController {
                 model.addAttribute("user", user);
             }
         }
+        return user;
+    }
+    @RequestMapping("/getUserByDepAndLevel")
+    public List<User> getUserByDepAndLevel(int depaId, int levelId){
+        return iUserMapper.getUserByDepAndLevel(depaId,levelId);
+    }
+    @RequestMapping("/loginUser")
+    public User getLoginUserUser(HttpSession session){
+        User user = (User)(session.getAttribute("user"));
+        user.setPassword("");
         return user;
     }
 }

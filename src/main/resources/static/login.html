@@ -14,7 +14,8 @@
 		<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./lib/private/public.css" />
 
-
+		<!-- 消息提示插件 -->
+		<link rel="stylesheet" href="./lib/toastr/toastr.min.css">
 		<style>
 			.vertical-center {
                 position: absolute;
@@ -25,7 +26,7 @@
         </style>
 	</head>
 	<body>
-		<div class="container vertical-center shadow" style="width: 450px; padding: 10px 20px 10px;" id="login-div">
+		<div class="container vertical-center shadow" style="width: 450px; padding: 10px 20px 30px;" id="login-div">
 			<h2 style="text-align: center;">云医院登录</h2>
 			<div class="form-horizontal" method="post" style="width: 360px;">
 				<div style="margin-left: 30px;">
@@ -43,7 +44,8 @@
 				</div>
 			</div>
 
-			<div v-show="flag" class="alert alert-warning alert-dismissible" style="margin-top: 1.25rem;" role="alert">
+			<!-- 弃用 -->
+			<div class="alert alert-warning alert-dismissible" style="margin-top: 1.25rem; display: none;" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -51,13 +53,32 @@
 			</div>
 		</div>
 	</body>
+	<script src="./lib/toastr/toastr.min.js"></script>
 	<script src="lib/vue/vue.min.js"></script>
 	<script src="lib/vue/axios.min.js"></script>
 	<script type="text/javascript">
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "2000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+
 		new Vue({
 			el: "#login-div",
 			data: {
-				flag: false,
 				user: {
 					username: "",
 					password: ""
@@ -65,20 +86,22 @@
 			},
 			methods: {
 				login: function() {
+					toastr["info"]("正在登录!")
 					var _this = this;
 					/* 写成这样是因为axios发送post时传递参数，springboot接收不到 */
-					axios.post('/user/login',"userName="+_this.user.username+"&password="+_this.user.password).then(function(res) {
+					axios.post('/user/login', "userName=" + _this.user.username + "&password=" + _this.user.password).then(function(
+						res) {
 						if (res.data.length === 0) {
-							_this.flag = true;
+							toastr["error"]("用户名或密码错误!")
 						} else {
 							_this.flag = false;
 							var type = res.data["type"]
-							if(type===3){
-								window.location.href="doctorHome.html"
-							}else if(type===2){
-								window.location.href="registrarHome.html"
-							}else if(type===1){
-								window.location.href="index.html"
+							if (type === 3) {
+								window.location.href = "doctorHome.html"
+							} else if (type === 2) {
+								window.location.href = "registrarHome.html"
+							} else if (type === 1) {
+								window.location.href = "index.html"
 							}
 						}
 					})

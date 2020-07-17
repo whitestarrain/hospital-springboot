@@ -55,13 +55,13 @@ public class TestAll {
         r.setNeedRecord(1);
         r.setRegistrarId(112);
 //        registerMapper.register(r);
-        service.register(r,5);
+        service.register(r);
         System.out.println(r.getId());
     }
     @Test
     public void test3(){
-        int i = invoiceMapper.SelectMaxInvoiceNum();
-        System.out.println(i);
+        Register aa = registerMapper.getRegisterByMedicalRecord(600611);
+        System.out.println(aa);
     }
 
 }

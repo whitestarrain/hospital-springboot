@@ -26,4 +26,11 @@ public interface IRegisterMapper {
      */
     public void InsertRegister(Register register);
 
+    /**
+     * 根据病历号获得最近挂号信息
+     * @return
+     */
+    @Select(" SELECT * FROM register WHERE id =   (SELECT MAX(id) FROM register WHERE medicalrecord = #{recordId})")
+    public Register getRegisterByMedicalRecord(int recordId);
+
 }

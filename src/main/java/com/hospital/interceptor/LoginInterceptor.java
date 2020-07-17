@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         if (session==null||session.getAttribute("user")==null){
-            request.getRequestDispatcher("/login.html").forward(request,response);
+            response.sendRedirect("/login.html");
             return false;
         }
         return true;

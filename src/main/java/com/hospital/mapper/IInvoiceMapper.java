@@ -23,6 +23,6 @@ public interface IInvoiceMapper {
      * 获得最大发票num
      * @return 最大发票num
      */
-    @Select(" SELECT MAX(number)+1 FROM invoice")
+    @Select(" SELECT MAX(number) FROM invoice")
     public int SelectMaxInvoiceNum();
 }

@@ -19,17 +19,23 @@ public class RegisterService implements IRegisterService {
     private IRegisterMapper registerMapper;
     @Autowired
     private IInvoiceMapper invoiceMapper;
+
     @Override
-    public int register(Register register,int userId) {
+    public Register getRegisterByMedicalRecord(int recordNum) {
+        return registerMapper.getRegisterByMedicalRecord(recordNum);
+    }
+
+    @Override
+    public int register(Register register) {
         registerMapper.InsertRegister(register);
         int maxInvoiceNum = invoiceMapper.SelectMaxInvoiceNum();
         Invoice invoice = new Invoice();
-        invoice.setNumber(maxInvoiceNum+1);
+        invoice.setNumber(maxInvoiceNum + 1);
         invoice.setPayAmount(new BigDecimal(20));
         invoice.setPayWay(register.getPayWay());
         invoice.setRegisterId(register.getId());
         invoice.setStatus(1);
-        invoice.setUserId(userId);
+        invoice.setUserId(register.getRegistrarId());
         invoiceMapper.insertInvovice(invoice);
         return invoice.getNumber();
     }
