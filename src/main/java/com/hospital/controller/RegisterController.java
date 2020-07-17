@@ -26,8 +26,6 @@ public class RegisterController {
 
     @RequestMapping("/doRegister")
     public int register(Register registerdata) {
-        System.out.println(registerdata);
-//        Object user = model.getAttribute("user");
         int invoiceNum = rs.register(registerdata);
 
        return invoiceNum;

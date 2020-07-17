@@ -43,7 +43,7 @@
 					<input type="text" disabled="disabled" class="form-control" v-model="invoiceNum" id="exampleInputName2"
 					 placeholder="发票号">
 				</div>
-				<button id="registerbtn" v-on:click="registerFun" class="btn btn-primary">挂号</button>
+				<button id="registerbtn" v-on:click="registerFun" class="btn btn-primary" disabled="disabled">挂号</button>
 				<button class="btn btn-primary">清空</button>
 			</div>
 			<h4 style="margin-left: 1.2%;">挂号信息:</h4>
@@ -117,7 +117,8 @@
 					<label for="exampleInputName13">看诊医生：</label>
 
 					<!-- 根据上面条件进行医生筛选 -->
-					<select class="form-control" id="exampleInputName13" v-model="registerdata.doctorId" style="width: 100px;">
+					<select id="selectdoctorid" class="form-control" v-model="registerdata.doctorId" style="width: 100px;">
+						<option value="0">请选择</option>
 						<option v-for="(d) in doctors" v-bind:value="d.id">{{d.name}}</option>
 					</select>
 				</div>
@@ -186,17 +187,16 @@
 					diagDate: "",
 					noon: "上",
 					depaId: 1,
-					doctorId: "",
+					doctorId: "0",
 					needRecord: true,
 				},
-				invoiceNum: "",
+				invoiceNum: "挂号后生成",
 				registerLevel: 1,
 				doctors: [{
 
 				}],
 				limitNum: "",
 				useNum: "0",
-				selectDocId: "",
 				registerPrice: 20 //可以改成从服务端获取
 			},
 			methods: {
@@ -258,9 +258,32 @@
 					})
 				}
 			}
-
-
 		})
+
+		$("#registerdiv input,select").blur(function() {
+			var flag = true;
+			$("#registerdiv input").each(function() {
+				console.log($(this).val())
+				if ($(this).val() == null || $(this).val() == undefined) {
+					flag = false;
+				}
+			})
+			$("#registerdiv select").each(function() {
+				console.log($(this).val())
+				if ($(this).val() == null || $(this).val() == undefined) {
+					console.log($(this).val())
+					flag = false;
+				}
+			})
+			console.log($("#selectdoctorid").val())
+			if($("#selectdoctorid").val()==null||$("#selectdoctorid").val()==undefined||$("#selectdoctorid").val()==0){
+				flag=false
+			}
+			$("#registerbtn").prop({
+				disabled: !flag
+			})
+		})
+		
 	</script>
 
 </html>
