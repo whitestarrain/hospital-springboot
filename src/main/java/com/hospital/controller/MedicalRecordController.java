@@ -19,4 +19,9 @@ public class MedicalRecordController {
     public MedicalRecord getMedicalRecordByNum(int recordNum){
         return mapper.getMedicalRecordByNum(recordNum);
     }
+
+    @RequestMapping("/insert")
+    public void InsertMedicalRecord(MedicalRecord m){
+        mapper.InsertMedical(m);
+    }
 }

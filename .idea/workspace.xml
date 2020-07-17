@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="33a7a0e1-f9bb-4b4b-a3bd-7cc587ecb637" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/domain/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/domain/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IRegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/service/IRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/service/IRegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/service/impl/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/service/impl/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/MedicalRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/MedicalRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IMedicalRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IMedicalRecordMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/doctorHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/doctorHome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/registrarHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/registrarHome.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestAll.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,22 +89,12 @@
       <recent name="D:\learn\IdeaProject\hospital\src\main\resources\static" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestAll.test">
+  <component name="RunManager" selected="JUnit.TestAll.test6">
     <configuration name="TestAll.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hospital" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestAll" />
       <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestAll.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hospital" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAll" />
-      <option name="METHOD_NAME" value="test3" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -136,6 +120,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestAll.test6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hospital" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAll" />
+      <option name="METHOD_NAME" value="test6" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HisSpringBootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="hospital" />
       <extension name="coverage">
@@ -151,11 +145,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestAll.test" />
+        <item itemvalue="JUnit.TestAll.test6" />
         <item itemvalue="Spring Boot.HisSpringBootApplication" />
         <item itemvalue="JUnit.TestAll.test5" />
+        <item itemvalue="JUnit.TestAll.test" />
         <item itemvalue="JUnit.TestAll.test4" />
-        <item itemvalue="JUnit.TestAll.test3" />
       </list>
     </recent_temporary>
   </component>
@@ -188,6 +182,7 @@
       <workItem from="1594905533886" duration="6517000" />
       <workItem from="1594941240161" duration="16528000" />
       <workItem from="1594965063536" duration="20520000" />
+      <workItem from="1594991088257" duration="8356000" />
     </task>
     <servers />
   </component>
@@ -195,46 +190,46 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1594985957896">
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1594993828933">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1594985957896" />
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1594993828933" />
     <state x="563" y="276" width="423" height="321" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1594949450989">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="563" y="276" width="423" height="321" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1549.871@0.0.1549.871" timestamp="1594949450989" />
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1594988752892">
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1595000278585">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1594988752892" />
-    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1594988752892">
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595000278585" />
+    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1595000278585">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1594988752892" />
-    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1594988752892">
+    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1595000278585" />
+    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1595000278585">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1594988752892" />
-    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1594988752892">
+    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1595000278585" />
+    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1595000278585">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1594988752892" />
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1594988640356">
+    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1595000278585" />
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1595000278581">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1594988640356" />
-    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1594988640355">
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595000278581" />
+    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1595000278581">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1594988640355" />
-    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1594988640355">
+    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1595000278581" />
+    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1595000278581">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1594988640355" />
-    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1594988640356">
+    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1595000278581" />
+    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1595000278581">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1594988640356" />
+    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1595000278581" />
     <state width="1506" height="272" key="GridCell.Tab.2.bottom" timestamp="1594912055868">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
@@ -255,10 +250,10 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="284" y="78" key="SettingsEditor/0.0.1549.871@0.0.1549.871" timestamp="1594900784796" />
-    <state x="449" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1594965073519">
+    <state x="449" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1594991105945">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="449" y="260" key="com.intellij.ide.util.TipDialog/0.0.1549.871@0.0.1549.871" timestamp="1594965073519" />
+    <state x="449" y="260" key="com.intellij.ide.util.TipDialog/0.0.1549.871@0.0.1549.871" timestamp="1594991105945" />
     <state x="425" y="62" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1594909033102">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
@@ -271,9 +266,9 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="453" y="158" width="643" height="556" key="find.popup/0.0.1549.871@0.0.1549.871" timestamp="1594965425901" />
-    <state x="437" y="183" width="672" height="678" key="search.everywhere.popup" timestamp="1594987933204">
+    <state x="437" y="183" width="672" height="678" key="search.everywhere.popup" timestamp="1594994570337">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="437" y="183" width="672" height="678" key="search.everywhere.popup/0.0.1549.871@0.0.1549.871" timestamp="1594987933204" />
+    <state x="437" y="183" width="672" height="678" key="search.everywhere.popup/0.0.1549.871@0.0.1549.871" timestamp="1594994570337" />
   </component>
 </project>

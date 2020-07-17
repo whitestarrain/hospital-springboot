@@ -1,11 +1,8 @@
 import com.hospital.HisSpringBootApplication;
+import com.hospital.domain.MedicalRecord;
 import com.hospital.domain.Register;
-import com.hospital.mapper.IInvoiceMapper;
-import com.hospital.mapper.IMedicalRecordMapper;
-import com.hospital.mapper.IRegisterMapper;
-import com.hospital.mapper.IUserMapper;
+import com.hospital.mapper.*;
 import com.hospital.service.IRegisterService;
-import com.hospital.service.impl.RegisterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +71,25 @@ public class TestAll {
         System.out.println(temp);
     }
     @Autowired
-    private IMedicalRecordMapper iMedicalRecordMapper;
+    private IMedicalRecordMapper MedicalRecordMapper;
     @Test
     public void test5(){
-        System.out.println(iMedicalRecordMapper.getMedicalRecordByNum(600601));
+        System.out.println(MedicalRecordMapper.getMedicalRecordByNum(600605));
+    }
+
+    @Autowired
+    private IJoDiseaseMapper joDiseaseMapper;
+
+    @Test
+    public void test6(){
+        System.out.println(joDiseaseMapper.getJoDisease());
+        
+        MedicalRecord m = new MedicalRecord();
+        m.setRecordNum(111111);
+        m.setAllergyhis("11");
+        m.setAnamnesis("ss");
+        m.setAttention("sss");
+        m.setTreatment("sss");
+        MedicalRecordMapper.InsertMedical(m);
     }
 }

@@ -104,6 +104,9 @@
 							</div>
 						</div>
 					</div>
+
+					<input type="hidden" name="" id="diagnoseType" v-model="diagnoseType" />
+
 					<div class="shadow padding-medium" style="margin-bottom: 5px;">
 						<div class="container-fluid">
 							<div class="row">
@@ -114,12 +117,12 @@
 								<div class="col-sm-2">
 									<a href="">删除</a>
 									<span>/</span>
-									<a href="javascript:toggleDisease(2)">增加</a>
+									<a v-on:click="setDiagnoseType(2)">增加</a>
 								</div>
 							</div>
 						</div>
 						<div class="container-fluid">
-							<table class="table table-hover text-center">
+							<table id="xiyitable" class="table table-hover text-center">
 								<tr style="font-weight: 600;">
 									<td class="col-sm-1">
 										<div class="checkbox">
@@ -127,20 +130,9 @@
 										</div>
 									</td>
 									<td class="col-sm-1">ICD编码</td>
-									<td class="col-sm-1">名称</td>
-									<td class="col-sm-7"></td>
+									<td class="col-sm-3">名称</td>
+									<td class="col-sm-5"></td>
 									<td class="col-sm-2">发病时间</td>
-								</tr>
-								<tr>
-									<td class="col-sm-1">
-										<div class="checkbox">
-											<input type="checkbox" />
-										</div>
-									</td>
-									<td class="col-sm-1">11111</td>
-									<td class="col-sm-1">1111</td>
-									<td class="col-sm-7"></td>
-									<td class="col-sm-2">11111</td>
 								</tr>
 							</table>
 						</div>
@@ -155,12 +147,12 @@
 								<div class="col-sm-2">
 									<a href="">删除</a>
 									<span>/</span>
-									<a href="javascript:toggleDisease(1)">增加</a>
+									<a v-on:click="setDiagnoseType(1)">增加</a>
 								</div>
 							</div>
 						</div>
 						<div class="container-fluid">
-							<table class="table table-hover text-center">
+							<table class="table table-hover text-center" id="zhongyitable">
 								<tr style="font-weight: 600;">
 									<td class="col-sm-1">
 										<div class="checkbox">
@@ -168,20 +160,9 @@
 										</div>
 									</td>
 									<td class="col-sm-1">ICD编码</td>
-									<td class="col-sm-1">名称</td>
-									<td class="col-sm-7"></td>
+									<td class="col-sm-3">名称</td>
+									<td class="col-sm-5"></td>
 									<td class="col-sm-2">发病时间</td>
-								</tr>
-								<tr>
-									<td class="col-sm-1">
-										<div class="checkbox">
-											<input type="checkbox" />
-										</div>
-									</td>
-									<td class="col-sm-1">11111</td>
-									<td class="col-sm-1">1111</td>
-									<td class="col-sm-7"></td>
-									<td class="col-sm-2">11111</td>
 								</tr>
 							</table>
 						</div>
@@ -189,7 +170,7 @@
 					<div class="form-group" style="margin-top:10px">
 						<label class="col-sm-1 control-label">检查建议</label>
 						<div class="col-sm-11">
-							<textarea class="form-control" rows="2" placeholder="检察建议" v-model="medicalrecord.checksugg"></textarea>
+							<textarea class="form-control" rows="2" placeholder="检察建议" v-model="medicalrecord.checkSugg"></textarea>
 						</div>
 					</div>
 					<div class="form-group" style="margin-top: 5px;">
@@ -199,7 +180,7 @@
 						</div>
 					</div>
 					<div class="row" style="margin-left: 10px;">
-						<div class="col-sm-1 text-primary submitbtn">
+						<div id="smallsubmit" v-on:click="submit" class="col-sm-1 text-primary submitbtn">
 							<span class="glyphicon glyphicon-upload" style="font-size: small;"></span>提交
 						</div>
 					</div>
@@ -224,6 +205,7 @@
 			</form>
 			<div class="container-fluid" id="disease-pop">
 				<table class="table table-hover text-center" id="diseasetable">
+					<input type="hidden" name="" id="selectDiseaseId" v-model="selectDiseaseId" />
 					<tr style="font-weight: 600;">
 						<td class="col-sm-2">ICD编码</td>
 						<td class="col-sm-2">名称</td>
@@ -231,12 +213,12 @@
 						<td class="col-sm-4"></td>
 						<td class="col-sm-1">操作</td>
 					</tr>
-					<tr v-for="(d) in diseases">
+					<tr id="disease-page" v-for="(d) in diseases" style="font-size: 14;">
 						<td class="col-sm-2">{{d.icd}}</td>
 						<td class="col-sm-2">{{d.name}}</td>
 						<td class="col-sm-1">{{d.type}}</td>
 						<td class="col-sm-4"></td>
-						<td class="col-sm-1"><button type="button" class="btn btn-primary">选择</button></td>
+						<td class="col-sm-1"><button v-on:click="selectDisease(d.id)" type="button" class="btn btn-primary">选择</button></td>
 					</tr>
 				</table>
 			</div>
@@ -322,27 +304,79 @@
 			el: "#diseasetable",
 			data: {
 				diseases: [{
-					name: 111,
-					id: 11,
-					icd: 111,
-					type: 111,
-
-				}]
+					name: 2111,
+					id: 121,
+					icd: 1121,
+					type: 1112,
+					typeId: 1111
+				}],
+				selectDiseaseId: "" //已绑定，可通过id可获取
+			},
+			methods: {
+				selectDisease: function(id) {
+					this.selectDiseaseId = id;
+				}
+			},
+			beforeMount: function() {
+				var _this = this;
+				axios.get("/disease/getDiseases").then(function(resp) {
+					_this.diseases = resp.data
+				})
 			}
 		})
 		new Vue({
 			el: "#medicalrecord",
 			data: {
 				medicalrecord: {
-					recordNum: 111,
-					symptom: 111,
-					nowHistory: 111,
-					anamnesis: 111,
-					allergyhis: 111,
-					treatment: 111,
-					checkup: 111,
-					checksugg: 11,
-					attention: 111,
+					recordNum: "",
+					symptom: "",
+					nowHistory: "",
+					anamnesis: "",
+					allergyhis: "",
+					treatment: "",
+					checkup: "",
+					checkSugg: "",
+					attention: "",
+				},
+				diagnoseType: "", //已绑定，可通过id可获取
+			},
+			methods: {
+				// 诊断数据调教
+				submit: function() {
+					var _this = this;
+					var o = window.parent.document.getElementById("recordNum").innerHTML;
+					var a = window.parent.document.getElementById("registerId").innerHTML;
+					var b = _this.diagnoseType
+					var c = document.getElementById("selectDiseaseId").value
+					//两个axios提交
+					axios.get("/medicalRecord/insert"), {
+						params: {
+							recordNum: o,
+							symptom: _this.medicalrecord.symptom,
+							nowHistory: _this.medicalrecord.nowHistory,
+							anamnesis: _this.medicalrecord.anamnesis,
+							allergyhis: _this.medicalrecord.allergyhis,
+							treatment: _this.medicalrecord.treatment,
+							checkup: _this.medicalrecord.checkup,
+							checkSugg: _this.medicalrecord.checkSugg,
+							attention: _this.medicalrecord.attention
+						}
+					}
+
+					axios.get("/diagnose/doDiagnose", {
+						params: {
+							registerId: a,
+							diagnoseType: b,
+							selectDiseaseId: c
+						}
+					})
+					//TODO 调用左侧刷新
+					//TODO 上面按钮添加事件
+				},
+				setDiagnoseType: function(a) {
+					/* 弹出页面 */
+					toggleDisease(a)
+					this.diagnoseType = a;
 				}
 			},
 			beforeMount: function() {
@@ -357,16 +391,41 @@
 				})
 			}
 		})
-		
-		$(function(){
-			setTimeout(function(){
+
+		/* 已诊的话就不能再改了 */
+		$(function() {
+			setTimeout(function() {
 				var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
-				if(Selectedstatus==2){
+				if (Selectedstatus == 2) {
 					$("#medicalrecord *").prop({
-						 disabled: true
+						disabled: true
 					})
 				}
-			},300)
+			}, 300)
+		})
+
+		/* 为选择按钮添加事件，使数据移动 */
+		$(function() {
+			setTimeout(function() {
+				$("#disease-page button").click(function(e) {
+					var btn = e.target
+					var a = $(btn).parent().siblings()
+					var zx = $("#diagnoseType").val();
+					var tr = $(
+						"<tr><td class='col-sm-1'><div class='checkbox'><input type='checkbox' /></div></td><td class='col-sm-1'>" +
+						a[0].innerHTML + "</td><td class='col-sm-3'>" + a[1].innerHTML +
+						"</td><td class='col-sm-5'></td><td class='col-sm-2'><input type='date' /></td></tr>")
+					if (zx == 2) {
+						$("#xiyitable").append(tr)
+					} else {
+						$("#zhongyitable").append(tr);
+					}
+
+					/* 关闭页面 */
+					toggleDisease(a)
+				})
+			}, 500)
+
 		})
 
 		// 跨层获取数据

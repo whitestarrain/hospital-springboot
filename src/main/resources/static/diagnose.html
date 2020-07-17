@@ -31,7 +31,7 @@
 		<div id="diagnose-window">
 			<div id="left-part">
 				<div id="left-up-part">
-					<p style="font-size: 14px;">患者选择：</p><a class="glyphicon glyphicon-refresh btn btn-primary"></a>
+					<p style="font-size: 14px;">患者选择：</p><a v-on:click="refreshRegister" class="glyphicon glyphicon-refresh btn btn-primary"></a>
 				</div>
 				<div id="left-middle-part">
 					<form class="form-inline">
@@ -99,7 +99,7 @@
 				</div>
 
 				<div id="right-down-part">
-					<iframe name="diagnoseIframe" src="./MedicalRecord.html" style="height: 100%; width: 100%; border: none;"></iframe>
+					<iframe name="diagnoseIframe" id="diagnoseIframe" style="height: 100%; width: 100%; border: none;"></iframe>
 				</div>
 			</div>
 
@@ -140,6 +140,17 @@
 					status: 2
 				}]
 			},
+			methods: {
+				refreshRegister: function() {
+					var _this = this;
+					axios.get("/register/getCurrentNoDiagnoseRegister").then(function(resp) {
+						_this.noDiagnosedRegister = resp.data
+					})
+					axios.get("/register/getCurrentDiagnosedRegister").then(function(resp) {
+						_this.diagnosedRegister = resp.data
+					})
+				}
+			},
 			beforeMount: function() {
 				var _this = this;
 				axios.get("/register/getCurrentNoDiagnoseRegister").then(function(resp) {
@@ -164,6 +175,8 @@
 						var b = document.querySelector("#register-info>span:nth-child(" + i + ")");
 						b.innerHTML = a.innerHTML
 					}
+					var temp = this.querySelector("td:nth-child(4)");
+					document.querySelector("#register-info>span:nth-child(4)").innerHTML = temp.innerHTML == 71 ? '男' : '女'
 					$("#diagnoseIframe").prop({
 						src: "./MedicalRecord.html"
 					})
