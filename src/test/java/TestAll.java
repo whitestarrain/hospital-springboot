@@ -137,6 +137,6 @@ public class TestAll {
     private IVoDrugDetailMapper joDrugDetailMapper;
     @Test
     public void test12(){
-        System.out.println(joDrugDetailMapper.getJoDrugDetailById(2));
+        System.out.println(joDrugDetailMapper.getVoDrugDetailById(2));
     }
 }

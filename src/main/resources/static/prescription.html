@@ -50,7 +50,7 @@
 							<span class="glyphicon glyphicon-plus" style="font-size: small;"></span>增方
 						</div>
 						<div id="deleteSelectedPrescriptinon" class="col-sm-1 text-primary">
-							<span  class="glyphicon glyphicon-minus" style="font-size: small;"></span>删方
+							<span class="glyphicon glyphicon-minus" style="font-size: small;"></span>删方
 						</div>
 						<div class="col-sm-1 text-primary">
 							<span class="glyphicon glyphicon-ok" style="font-size: small;"></span>开立
@@ -76,9 +76,9 @@
 					</div>
 					<table id="selectedPrescriptions" class="table table-hover text-center">
 						<tr style="font-weight: 600;">
-							<td></td>
-							<td>模版名称</td>
-							<td>状态</td>
+							<td style="width: 10%;"></td>
+							<td style="width: 60%;">模版名称</td>
+							<td style="width: 30%;">状态</td>
 						</tr>
 					</table>
 				</div>
@@ -97,7 +97,7 @@
 					</div>
 					<div>
 						<table id="RightTopTable" class="table table-hover">
-						<input type="hidden" name="" id="drugListsJson" v-on:click="update" />
+							<input type="hidden" name="" id="drugListsJson" v-on:click="update" />
 							<tr style="font-weight: 600;">
 								<td><input type="checkbox" name="" id=""></td>
 								<td>药品名称</td>
@@ -143,7 +143,13 @@
 							<button type="submit" class="btn btn-default"><span class="glyphicon
 									glyphicon-search"></span></button>
 						</form>
+						<!-- <button id="initializationbtn" type="button" style="display: none;" v-on:click="initialization)"></button>
+						 button放这里的话会导致下半部分全没？？原因未知-->
+
 						<table class="table table-hover" id="prescriptionTable">
+							<tr style="display: none;">
+								<span id="initializationbtn" v-on:click="initialization"></span>
+							</tr>
 							<tr style="font-weight: 600;">
 								<td>模版名称</td>
 								<td>范围</td>
@@ -160,22 +166,22 @@
 						<span style="float: right;margin: 2px 4px 2px;"><button id="use-pres" class="btn btn-primary">使用该模版</button></span>
 						<table class="table table-hover">
 							<tr style="font-weight: 600;">
-								<td>药品名称</td>
-								<td>规格</td>
-								<td>单价</td>
-								<td>用法</td>
-								<td>用量</td>
-								<td>频次</td>
-								<td>数量</td>
+								<td style="width: 20%;">药品名称</td>
+								<td style="width: 20%;">规格</td>
+								<td style="width: 10%;">单价</td>
+								<td style="width: 20%;">用法</td>
+								<td style="width: 10%;">用量</td>
+								<td style="width: 10%;">频次</td>
+								<td style="width: 10%;">数量</td>
 							</tr>
 							<tr v-for="(t) in selectedPrescriptionDrugs" v-on:click="setTemplate">
-								<td>{{t.name}}</td>
-								<td>{{t.specification}}</td>
-								<td>{{t.price}}</td>
-								<td>{{t.useWay}}</td>
-								<td>{{t.dosage}}</td>
-								<td>{{t.frequency}}</td>
-								<td>{{t.number}}</td>
+								<td style="width: 20%;">{{t.name}}</td>
+								<td style="width: 20%;">{{t.specification}}</td>
+								<td style="width: 10%;">{{t.price}}</td>
+								<td style="width: 20%;">{{t.useWay}}</td>
+								<td style="width: 10%;">{{t.dosage}}</td>
+								<td style="width: 10%;">{{t.frequency}}</td>
+								<td style="width: 10%;">{{t.number}}</td>
 							</tr>
 						</table>
 					</div>
@@ -222,7 +228,7 @@
 				</div>
 			</form>
 			<div class="container-fluid" style="font-size: 15px;">
-				<table id="table19" class="table table-hover text-center">
+				<table id="addDrugTable" class="table table-hover text-center">
 					<tr style="font-weight: 600;">
 						<td class="col-sm-2">药品编码</td>
 						<td class="col-sm-2">药品名称</td>
@@ -233,45 +239,15 @@
 						<td class="col-sm-1">类型</td>
 						<td class="col-sm-1">操作</td>
 					</tr>
-					<tr>
-						<td class="col-sm-2">药品编码</td>
-						<td class="col-sm-2">药品名称</td>
-						<td class="col-sm-2">药品规格</td>
-						<td class="col-sm-2">药品单位</td>
-						<td class="col-sm-1">单价</td>
-						<td class="col-sm-1">剂型</td>
-						<td class="col-sm-1">类型</td>
-						<td class="col-sm-1"><button href="" class="btn btn-primary">选择</button></td>
-					</tr>
-					<tr>
-						<td class="col-sm-2">药品编码</td>
-						<td class="col-sm-2">药品名称</td>
-						<td class="col-sm-2">药品规格</td>
-						<td class="col-sm-2">药品单位</td>
-						<td class="col-sm-1">单价</td>
-						<td class="col-sm-1">剂型</td>
-						<td class="col-sm-1">类型</td>
-						<td class="col-sm-1"><button href="" class="btn btn-primary">选择</button></td>
-					</tr>
-					<tr>
-						<td class="col-sm-2">药品编码</td>
-						<td class="col-sm-2">药品名称</td>
-						<td class="col-sm-2">药品规格</td>
-						<td class="col-sm-2">药品单位</td>
-						<td class="col-sm-1">单价</td>
-						<td class="col-sm-1">剂型</td>
-						<td class="col-sm-1">类型</td>
-						<td class="col-sm-1"><button href="" class="btn btn-primary">选择</button></td>
-					</tr>
-					<tr>
-						<td class="col-sm-2">药品编码</td>
-						<td class="col-sm-2">药品名称</td>
-						<td class="col-sm-2">药品规格</td>
-						<td class="col-sm-2">药品单位</td>
-						<td class="col-sm-1">单价</td>
-						<td class="col-sm-1">剂型</td>
-						<td class="col-sm-1">类型</td>
-						<td class="col-sm-1"><button href="" class="btn btn-primary">选择</button></td>
+					<tr v-for="(d) in drugList">
+						<td class="col-sm-2">{{d.drugCode}}</td>
+						<td class="col-sm-2">{{d.name}}</td>
+						<td class="col-sm-2">{{d.specification}}</td>
+						<td class="col-sm-2">{{d.pack}}</td>
+						<td class="col-sm-1">{{d.price}}</td>
+						<td class="col-sm-1">{{d.form}}</td>
+						<td class="col-sm-1">{{d.type}}</td>
+						<td class="col-sm-1"><button v-on:click="addDrug(d.id)" class="btn btn-primary">选择</button></td>
 					</tr>
 				</table>
 			</div>
@@ -296,8 +272,7 @@
 					</ul>
 				</nav>
 			</div>
-			<button id="cancel-select" class="btn" style="position: absolute;left:
-			50%;transform: translate(-50%,0);">取消</button>
+			<button id="cancel-select" class="btn" style="position: absolute;left:50%;transform: translate(-50%,0);top: 90%;">取消</button>
 		</div>
 
 		<!-- 药品用法信息弹框 -->
@@ -308,7 +283,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title">药品详情</h4>
 					</div>
-					<div class="modal-body container-fluid">
+					<div id="addDrugDetails" class="modal-body container-fluid">
 						<div class="form-group row">
 							<div class="col-xs-2">
 								<label style="font-size: 14px; line-height: 35px;">药品编码:</label>
@@ -319,37 +294,62 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-xs-2">
-								<label style="font-size: 14px; line-height: 35px;">药品编码:</label>
+								<label style="font-size: 14px; line-height: 35px;">药品名称:</label>
 							</div>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" placeholder="药品编码">
+								<input type="text" class="form-control" placeholder="药品名称">
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-xs-2">
-								<label style="font-size: 14px; line-height: 35px;">药品编码:</label>
+								<label style="font-size: 14px; line-height: 35px;">药品规格:</label>
 							</div>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" placeholder="药品编码">
+								<input type="text" class="form-control" placeholder="药品规格">
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-xs-2">
-								<label style="font-size: 14px; line-height: 35px;">药品编码:</label>
+								<label style="font-size: 14px; line-height: 35px;">药品单位:</label>
 							</div>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" placeholder="药品编码">
+								<input type="text" class="form-control" placeholder="药品单位">
 							</div>
 						</div>
 						<div class="form-group row">
 							<div class="col-xs-2">
-								<label style="font-size: 14px; line-height: 35px;">药品编码:</label>
+								<label style="font-size: 14px; line-height: 35px;">药品用法:</label>
 							</div>
 							<div class="col-xs-10">
-								<input type="text" class="form-control" placeholder="药品编码">
+								<input type="text" class="form-control" placeholder="药品用法">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label style="font-size: 14px; line-height: 35px;">药品用量:</label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" placeholder="药品用量">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label style="font-size: 14px; line-height: 35px;">药品频次:</label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" placeholder="药品频次">
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label style="font-size: 14px; line-height: 35px;">数量:</label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" placeholder="数量">
 							</div>
 						</div>
 					</div>
+
 					<div class="modal-footer text-center" style="text-align: center;">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
 						<button type="button" id="adddurgbtn" class="btn btn-primary" data-dismiss="modal">添加</button>

@@ -62,12 +62,22 @@ new Vue({
 			}).then(function(resp) {
 				_this.selectedPrescriptionDrugs = resp.data
 			})
+		},
+		initialization:function(){
+			//初始化处方表
+			var _this = this
+			axios.get("/prescription/getAll").then(function(resp) {
+				_this.prescriptions = resp.data
+				_this.selectedPrescriptionDrugs = []
+			})
 		}
 	},
 	beforeMount: function() {
+		//初始化处方表
 		var _this = this
 		axios.get("/prescription/getAll").then(function(resp) {
 			_this.prescriptions = resp.data
+			_this.selectedPrescriptionDrugs = []
 		})
 	}
 })
@@ -111,6 +121,82 @@ new Vue({
 			})
 
 		}
+	}
+})
+
+new Vue({
+	el:"#addDrugTable",
+	data:{
+		drugList:[
+			{
+				 drugCode:"",
+				 id:"",
+				 name:"",
+				 specification:"",
+				 price:"",
+				 pack:"",
+				 form:"",
+				 type:""
+			}
+		]
+	},
+	methods:{
+		addDrug:function(a){
+			var drugId = a;
+			// flag用来记录是否有选中的
+			var flag = false;
+			var prescriptionIdV;
+			var radios = $("#selectedPrescriptions input[type=radio]")
+			// 获得当前处方id
+			for (var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					flag = true;
+					prescriptionIdV = ($(radios[i]).parent().parent().children())[0].value
+					break;
+				}
+			}
+			// 没有选中处方时跳出
+			if(!flag){
+				toastr["info"]("请选择处方id")
+				return
+			}
+			var selectedDrug;
+			for(var i = 0;i<this.drugList.length;i++){
+				if(this.drugList[i].id = drugId){
+					selectedDrug = this.drugList[i]
+					break;
+				}
+			}
+			
+			var div = $("#addDrugDetails")[0]
+			// 设置信息
+			div.querySelector("div[class='form-group row']:nth-child(1)>div:nth-child(2)>input").value = selectedDrug.drugCode
+			div.querySelector("div[class='form-group row']:nth-child(2)>div:nth-child(2)>input").value = selectedDrug.name
+			div.querySelector("div[class='form-group row']:nth-child(3)>div:nth-child(2)>input").value = selectedDrug.specification
+			div.querySelector("div[class='form-group row']:nth-child(4)>div:nth-child(2)>input").value = selectedDrug.pack
+			
+			
+			// 弹出药品详细界面
+			$("#use-drug-Modal").modal()
+			
+			// 注册个确认按钮的点击事件（目的是为了传入选中的药品id和其他数据）
+			$("#adddurgbtn").click(prescriptionIdV,function(event){
+				var prescriptionId = event.data;
+				console.log(prescriptionId)
+				var div = $("#addDrugDetails")[0]
+				// 	TODO
+				
+				// 从页面搜取必要信息
+				// ajax请求，数据库插入
+				// 右上table数据更新:updateRightTop函数
+			})
+		}
+	},
+	beforeMount:function(){
+		var _this = this
+		axios.get("/drug/getDrugDetails").then(function(resp){
+			_this.drugList=resp.data
+		})
 	}
 })
 
@@ -162,9 +248,9 @@ var appendPrescription = function() {
 	//TODO
 	var a = $("#prescriptionTable tr.info *")
 
-	var tr = "<tr><input type='hidden' value='" + $(a[0]).val() + "'/><td><input type='radio' name='pres'></td><td>" + a[
+	var tr = "<tr><input type='hidden' value='" + $(a[0]).val() + "'/><td style='width:10%'><input type='radio' name='pres'></td><td style='width:60%'>" + a[
 			1].innerHTML +
-		"</td><td>暂存</td></tr>"
+		"</td><td style='width:10%'>暂存</td></tr>"
 	$("#selectedPrescriptions").append(tr)
 	toastr["success"]("添加成功!")
 
@@ -197,7 +283,6 @@ $(function() {
 
 
 // 确认增方后删除modal中的数据，添加到处方栏中
-
 $("#addPrescriptionBtn").click(function() {
 	var nameval = $("#newPrescriptionName").val();
 	axios.get("/prescription/insertPrescription", {
@@ -214,12 +299,23 @@ $("#addPrescriptionBtn").click(function() {
 		// 清除数据
 		$("#newPrescriptionName").val("");
 
+		// 左下重新初始化
+		
+		reinitializationLeftDown()
 		$("#selectedPrescriptions").append(tr)
 		toastr["success"]("添加成功!")
 	})
 })
 
-
+function reinitializationLeftDown(){
+	
+	// 左下，重新初始化。右下侧也会删除数据
+	document.getElementById("initializationbtn").click()
+	// 删除选中样式
+	$("#prescriptionTable tr").removeClass("info")
+	// 重新设置点击事件
+	setTimeout(setEffect, 200);
+}
 
 
 $("#create-pres").click(function() {
@@ -234,12 +330,11 @@ $("#cancel-select").click(function() {
 	$("#drugs").slideToggle("slow")
 })
 
-// TODO 加药弹窗
-$("#drugs>div button").click(function() {
-	// TODO 获取药品信息填入
-	$("#use-drug-Modal").modal()
-})
 
 $("#adddurgbtn").click(function() {
+	$("#drugs").slideToggle("fast")
+})
+
+$("#cancelAddDrug").click(function(){
 	$("#drugs").slideToggle("fast")
 })
