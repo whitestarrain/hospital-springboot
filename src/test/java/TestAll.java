@@ -122,7 +122,7 @@ public class TestAll {
     private IVoDrugTemplateMapper joDrugTemplateMapper;
     @Test
     public void test10(){
-        System.out.println(joDrugTemplateMapper.getJoDrugTemplateById(2));
+        System.out.println(joDrugTemplateMapper.getVoDrugTemplateById(2));
     }
     @Test
     public void test11(){

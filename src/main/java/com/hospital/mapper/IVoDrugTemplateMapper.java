@@ -40,5 +40,7 @@ public interface IVoDrugTemplateMapper {
             "      FROM\n" +
             "        drugtempl \n" +
             "      WHERE presid = #{id})) t3")
-    public List<VoDrugTemplate> getJoDrugTemplateById(int id);
+    public List<VoDrugTemplate> getVoDrugTemplateById(int id);
+
+
 }

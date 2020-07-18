@@ -33,7 +33,7 @@ public class PrescriptionController {
 
     @RequestMapping("/getTemplate")
     public List<VoDrugTemplate> getTemplateById(int id) {
-        return voDrugTemplateMapper.getJoDrugTemplateById(id);
+        return voDrugTemplateMapper.getVoDrugTemplateById(id);
     }
 
     @RequestMapping("/getTemplateByIds")
@@ -45,7 +45,7 @@ public class PrescriptionController {
         int[] ints = Arrays.stream(split).mapToInt(Integer::parseInt).toArray();
         ArrayList<VoDrugTemplate> list = new ArrayList<>();
         for (int i : ints) {
-            list.addAll(voDrugTemplateMapper.getJoDrugTemplateById(i));
+            list.addAll(voDrugTemplateMapper.getVoDrugTemplateById(i));
         }
 
         return list;
