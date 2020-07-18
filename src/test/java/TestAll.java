@@ -1,6 +1,8 @@
 import com.hospital.HisSpringBootApplication;
 import com.hospital.domain.MedicalRecord;
+import com.hospital.domain.Prescription;
 import com.hospital.domain.Register;
+import com.hospital.domain.User;
 import com.hospital.mapper.*;
 import com.hospital.service.IRegisterService;
 import org.junit.Test;
@@ -123,5 +125,13 @@ public class TestAll {
     @Test
     public void test10(){
         System.out.println(joDrugTemplateMapper.getJoDrugTemplateById(2));
+    }
+    @Test
+    public void test11(){
+        Prescription p = new Prescription();
+        p.setName("name111");
+        p.setDocId(1);
+        prescriptionMapper.insertPrescription(p);
+        System.out.println(p.getId());
     }
 }

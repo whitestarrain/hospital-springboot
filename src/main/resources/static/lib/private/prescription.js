@@ -41,6 +41,7 @@ new Vue({
 			range: ""
 		}],
 		selectedPrescriptionDrugs: [{
+			id: "",
 			name: "",
 			specification: "",
 			useWay: "",
@@ -68,6 +69,48 @@ new Vue({
 		axios.get("/prescription/getAll").then(function(resp) {
 			_this.prescriptions = resp.data
 		})
+	}
+})
+
+new Vue({
+	el: "#RightTopTable",
+	data: {
+		drugLists: [{
+			id: "",
+			name: "",
+			specification: "",
+			useWay: "",
+			dosage: "",
+			frequency: "",
+			number: "",
+			price: ""
+		}]
+	},
+	methods: {
+		update: function() {
+			var _this = this
+			var radios = $("#selectedPrescriptions input[type=hidden]")
+			var arr_str = ""
+			for (var i = 0; i < radios.length; i++) {
+				// 获取左上所有处方id
+				arr_str = arr_str + $(radios[i]).val() + ","
+			}
+			axios.get("/prescription/getTemplateByIds", {
+				params: {
+					ids: arr_str
+				}
+			}).then(function(resp) {
+				_this.drugLists = resp.data
+				var temp = resp.data
+				var sum = 0
+				for (var i = 0; i < temp.length; i++) {
+					sum += parseFloat(temp[i].price) * parseFloat(temp[i].number)
+					// 按照所有价格，不可能出现多于两位数的总额
+					document.getElementById("allmoney").innerHTML = parseFloat(sum.toFixed(2))
+				}
+			})
+
+		}
 	}
 })
 
@@ -119,31 +162,62 @@ var appendPrescription = function() {
 	//TODO
 	var a = $("#prescriptionTable tr.info *")
 
-	var tr = "<tr><inputtype='hidden' value='" + a[0].value + "'/><td><input type='radio' name='pres'></td><td>" + a[1].innerHTML +
+	var tr = "<tr><input type='hidden' value='" + $(a[0]).val() + "'/><td><input type='radio' name='pres'></td><td>" + a[
+			1].innerHTML +
 		"</td><td>暂存</td></tr>"
 	$("#selectedPrescriptions").append(tr)
 	toastr["success"]("添加成功!")
+
+	// 更新右上角
+	updateRightTop()
 }
+
+// 更新右上角
+function updateRightTop() {
+	// 调用vue中的方法
+	document.getElementById("drugListsJson").click();
+}
+
 // 删除选中的
 var removeSelectedPrescription = function() {
 	// TODO 待修改
-	var radios = $("#selectedPrescriptions input")
+	var radios = $("#selectedPrescriptions input[type=radio]")
 	for (var i = 0; i < radios.length; i++) {
-		console.log(radios[i].checked)
 		if (radios[i].checked) {
-			console.log(radio)
-			radio.parent().parent().remove()
-
+			$(radios[i]).parent().parent().remove()
 		}
-
 	}
+
+	// 更新右上角
+	updateRightTop()
 }
-$("#deleteSelectedPrescriptinon").click(removeSelectedPrescription)
+$(function() {
+	$("#deleteSelectedPrescriptinon").click(removeSelectedPrescription)
+})
 
 
-// TODO 搜索功能（模版选做）
+// 确认增方后删除modal中的数据，添加到处方栏中
 
-// TODO 处方模版中，选择处方时效果变化（自己写个css的class），模版明细的显示
+$("#addPrescriptionBtn").click(function() {
+	var nameval = $("#newPrescriptionName").val();
+	axios.get("/prescription/insertPrescription", {
+		params: {
+			name:nameval
+		}
+		
+	}).then(function(resp) {
+		var name = $("#newPrescriptionName").val();
+		var id = resp.data
+		var tr = "<tr><input type='hidden' value='" + id + "'/><td><input type='radio' name='pres'></td><td>" + name +
+			"</td><td>暂存</td></tr>"
+
+		// 清除数据
+		$("#newPrescriptionName").val("");
+
+		$("#selectedPrescriptions").append(tr)
+		toastr["success"]("添加成功!")
+	})
+})
 
 
 
@@ -151,8 +225,6 @@ $("#deleteSelectedPrescriptinon").click(removeSelectedPrescription)
 $("#create-pres").click(function() {
 	$("#create-pres-Modal").modal()
 })
-// TODO 确认增方后删除modal中的数据，添加到处方栏中
-// TODO 取消增方后删除数据
 
 
 $("#add-drug").click(function() {

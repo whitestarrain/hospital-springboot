@@ -6,6 +6,7 @@ import java.math.BigDecimal;
  * @author liyu
  */
 public class JoDrugTemplate {
+    private int id;
     private String name;
     private String specification;
     private String useWay;
@@ -17,7 +18,8 @@ public class JoDrugTemplate {
     @Override
     public String toString() {
         return "JoDrugTemplate{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", specification='" + specification + '\'' +
                 ", useWay='" + useWay + '\'' +
                 ", dosage='" + dosage + '\'' +
@@ -25,6 +27,14 @@ public class JoDrugTemplate {
                 ", number=" + number +
                 ", price=" + price +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

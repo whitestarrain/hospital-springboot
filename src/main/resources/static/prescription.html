@@ -49,8 +49,8 @@
 						<div id="create-pres" class="col-sm-1 text-primary">
 							<span class="glyphicon glyphicon-plus" style="font-size: small;"></span>增方
 						</div>
-						<div class="col-sm-1 text-primary">
-							<span id="deleteSelectedPrescriptinon" class="glyphicon glyphicon-minus" style="font-size: small;"></span>删方
+						<div id="deleteSelectedPrescriptinon" class="col-sm-1 text-primary">
+							<span  class="glyphicon glyphicon-minus" style="font-size: small;"></span>删方
 						</div>
 						<div class="col-sm-1 text-primary">
 							<span class="glyphicon glyphicon-ok" style="font-size: small;"></span>开立
@@ -89,14 +89,15 @@
 							<div class="col-sm-3 text-primary highlight text-center border-line" style="background-color: #eef6fe; line-height: 30px;">
 								金额合计:
 							</div>
-							<div class="col-sm-2 text-warning highlight text-center border-line" style="background-color:#FEF4EE; line-height: 30px;margin-left:
+							<div id="allmoney" class="col-sm-3 text-warning highlight text-center border-line" style="background-color:#FEF4EE; line-height: 30px;margin-left:
 								10px;">
-								100元
+								0元
 							</div>
 						</div>
 					</div>
 					<div>
-						<table class="table table-hover">
+						<table id="RightTopTable" class="table table-hover">
+						<input type="hidden" name="" id="drugListsJson" v-on:click="update" />
 							<tr style="font-weight: 600;">
 								<td><input type="checkbox" name="" id=""></td>
 								<td>药品名称</td>
@@ -107,29 +108,15 @@
 								<td>频次</td>
 								<td>数量</td>
 							</tr>
-							<tr>
-								<td>
-									<input type="checkbox">
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="checkbox">
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								<td>1111</td>
-								</td>
+							<tr v-for="(d) in drugLists">
+								<td><input type="checkbox" v-bind:value="d.id"></td>
+								<td>{{d.name}}</td>
+								<td>{{d.specification}}</td>
+								<td>{{d.price}}</td>
+								<td>{{d.useWay}}</td>
+								<td>{{d.dosage}}</td>
+								<td>{{d.frequency}}</td>
+								<td>{{d.number}}</td>
 							</tr>
 						</table>
 					</div>
@@ -208,13 +195,13 @@
 
 						<div class="form-group">
 							<label for="txt_departmentname">处方名称</label>
-							<input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="处方名称">
+							<input type="text" name="txt_departmentname" class="form-control" id="newPrescriptionName" placeholder="处方名称">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"
 							 aria-hidden="true"></span>关闭</button>
-						<button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk"
+						<button type="button" id="addPrescriptionBtn" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk"
 							 aria-hidden="true"></span>保存</button>
 					</div>
 				</div>
