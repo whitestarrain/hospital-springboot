@@ -28,7 +28,11 @@ public class DrugController {
     }
 
     @RequestMapping("/insertDrugTemplate")
-    public void insertDrugTemplate(DrugTemplate d){
-        drugTemplateMapper.insertDrugTemplate(d);
+    public int insertDrugTemplate(DrugTemplate d){
+        int num = drugTemplateMapper.canInsert(d);
+        if (num == 0){
+            drugTemplateMapper.insertDrugTemplate(d);
+        }
+        return num;
     }
 }

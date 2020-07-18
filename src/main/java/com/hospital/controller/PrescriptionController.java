@@ -60,4 +60,9 @@ public class PrescriptionController {
         prescriptionMapper.insertPrescription(p);
         return p.getId();
     }
+
+    @RequestMapping("/doPrescription")
+    public void doPrescription(int registerId,String ids){
+        prescriptionMapper.doPrescription(registerId,ids);
+    }
 }

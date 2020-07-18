@@ -138,5 +138,6 @@ public class TestAll {
     @Test
     public void test12(){
         System.out.println(joDrugDetailMapper.getVoDrugDetailById(2));
+        prescriptionMapper.doPrescription(209,"2,3");
     }
 }

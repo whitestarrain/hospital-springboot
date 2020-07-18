@@ -26,4 +26,7 @@ public interface IPrescriptionMapper {
      * 添加指定名称的的处方
      */
     public void insertPrescription(Prescription p);
+
+    @Insert("CALL doct_prescribe(#{0},#{1})")
+    public void doPrescription(int registerId,String ids);
 }

@@ -116,8 +116,8 @@ new Vue({
 				for (var i = 0; i < temp.length; i++) {
 					sum += parseFloat(temp[i].price) * parseFloat(temp[i].number)
 					// 按照所有价格，不可能出现多于两位数的总额
-					document.getElementById("allmoney").innerHTML = parseFloat(sum.toFixed(2))
 				}
+				document.getElementById("allmoney").innerHTML = parseFloat(sum.toFixed(2))
 			})
 
 		}
@@ -182,7 +182,7 @@ new Vue({
 				p: prescriptionIdV
 			}
 
-			// 注册个确认按钮的点击事件（目的是为了传入选中的药品id和其他数据）
+			// 注册个确认按钮的点击事件（目的是为了传入选中的药品id和处方id）
 			$("#adddurgbtn").click(mess, function(event) {
 				var mess = event.data;
 				var div = $("#addDrugDetails")[0]
@@ -194,7 +194,7 @@ new Vue({
 				var number = div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value
 				// ajax请求，数据库插入
 				axios.get("/drug/insertDrugTemplate", {
-					params:{
+					params: {
 						presId: mess.p,
 						drugId: mess.d,
 						"useWay": useWay,
@@ -202,10 +202,26 @@ new Vue({
 						"frequency": frequency,
 						"number": number
 					}
+				}).then(function(resp) {
+					if (resp.data > 0) {
+						toastr["error"]("不能添加重复药品")
+					} else {
+						toastr["success"]("添加成功")
+						// 右上table数据更新:updateRightTop函数
+						updateRightTop()
+					}
+
+
+					// 表格内数据可以清除
+					div.querySelector("div[class='form-group row']:nth-child(5)>div:nth-child(2)>input").value = ""
+					div.querySelector("div[class='form-group row']:nth-child(6)>div:nth-child(2)>input").value = ""
+					div.querySelector("div[class='form-group row']:nth-child(7)>div:nth-child(2)>input").value = ""
+					div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value = ""
+					
+					//关闭药品选择框
+					$("#drugs").slideToggle("fast")
 				})
-				
-				// 右上table数据更新:updateRightTop函数
-				updateRightTop()
+
 			})
 		}
 	},
@@ -335,6 +351,32 @@ function reinitializationLeftDown() {
 	setTimeout(setEffect, 200);
 }
 
+// 进行开立
+$("#kaili").click(function() {
+	var radios = $("#selectedPrescriptions input[type=hidden]")
+	var arr_str = ""
+	var rid = window.parent.document.getElementById("registerId").innerHTML;
+	if (radios.length == 0) {
+		toastr["info"]("您未选择处方，请选择")
+		return
+	}
+	for (var i = 0; i < radios.length; i++) {
+		// 获取左上所有处方id
+		arr_str = arr_str + $(radios[i]).val() + ","
+	}
+	// 去掉最后一个逗号
+	var str = arr_str.substring(0, arr_str.length - 1)
+	// 请求插入
+	axios.get("/prescription/doPrescription", {
+		params: {
+			registerId: rid,
+			ids: str
+		}
+	}).then(function() {
+		toastr["success"]("开立成功")
+	})
+})
+
 
 $("#create-pres").click(function() {
 	$("#create-pres-Modal").modal()
@@ -349,10 +391,14 @@ $("#cancel-select").click(function() {
 })
 
 
-$("#adddurgbtn").click(function() {
-	$("#drugs").slideToggle("fast")
-})
 
 $("#cancelAddDrug").click(function() {
 	$("#drugs").slideToggle("fast")
 })
+
+
+// TODO  诊毕
+
+// 删药
+
+// 更改时中西医的清除
