@@ -46,8 +46,8 @@ public class TestAll {
         r.setIdNumber("1312313131312x");
         r.setName("test");
         r.setGender(71);
-        r.setBirthday(new Date(2000, 1, 1));
-        r.setDiagDate(new Date(2000, 1, 1));
+//        r.setBirthday(new Date(2000, 1, 1));
+//        r.setDiagDate(new Date(2000, 1, 1));
         r.setRegistrarId(300);
         r.setNoon("上");
         r.setDepaId(33);
@@ -109,5 +109,19 @@ public class TestAll {
     public void test8(){
         System.out.println(joDiagnoseMapper.getChineseJoDiagnoseByRegisterId(206));
         System.out.println(joDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(206));
+    }
+    @Autowired
+    private IPrescriptionMapper prescriptionMapper;
+
+    @Test
+    public void test9(){
+        System.out.println(prescriptionMapper.selectAllPrescription());
+    }
+
+    @Autowired
+    private IJoDrugTemplateMapper joDrugTemplateMapper;
+    @Test
+    public void test10(){
+        System.out.println(joDrugTemplateMapper.getJoDrugTemplateById(2));
     }
 }

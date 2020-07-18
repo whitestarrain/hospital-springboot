@@ -87,7 +87,7 @@
 				</div>
 				<div id="right-up-part">
 					<ul class="nav nav-tabs">
-						<li role="presentation" class="active"><a href="javascript:diagnose_medicalReocrd_UpTo()" style="padding-right: 18px;padding-left: 19px;">病历首页</a></li>
+						<li role="presentation" class="active"><a id="diagnose_medicalReocrd_UpTo_a" href="javascript:diagnose_medicalReocrd_UpTo()" style="padding-right: 18px;padding-left: 19px;">病历首页</a></li>
 						<li role="presentation"><a href="#">检查申请*</a></li>
 						<li role="presentation"><a href="#">检验申请*</a></li>
 						<li role="presentation"><a href="#">门诊确诊*</a></li>
@@ -173,16 +173,20 @@
 				$("#register-info").show()
 				$("#left-down-part table tr").removeClass("info")
 				$(this).addClass("info")
+				// 注意，因为是css选择器，要从1开始
 				for (var i = 1; i <= 6; i++) {
 					var a = this.querySelector("td:nth-child(" + i + ")")
 					var b = document.querySelector("#register-info>span:nth-child(" + i + ")");
 					b.innerHTML = a.innerHTML
 				}
 				var temp = this.querySelector("td:nth-child(4)");
-				document.querySelector("#register-info>span:nth-child(4)").innerHTML = temp.innerHTML == 71 ? '男' : '女'
-				$("#diagnoseIframe").prop({
-					src: "./MedicalRecord.html"
-				})
+				document.querySelector("#register-info>span:nth-child(4)").innerHTML = temp.innerHTML == 71 ? '男' : '女',
+			
+				// $("#diagnoseIframe").prop({
+				// 	src: "./MedicalRecord.html"
+				// })
+				// 代替
+				document.getElementById("diagnose_medicalReocrd_UpTo_a").click()
 			})
 		}
 
