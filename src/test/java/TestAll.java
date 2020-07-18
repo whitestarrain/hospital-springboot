@@ -92,4 +92,22 @@ public class TestAll {
         m.setTreatment("sss");
         MedicalRecordMapper.InsertMedical(m);
     }
+    @Test
+    public void test7(){
+        System.out.println(MedicalRecordMapper.isHas(111111));
+        MedicalRecord m = new MedicalRecord();
+        m.setRecordNum(111111);
+        m.setAllergyhis("11");
+        m.setAnamnesis("ss");
+        m.setAttention("sss");
+        m.setTreatment("sss");
+        MedicalRecordMapper.updateMedicalRecord(m);
+    }
+    @Autowired
+    private IJoDiagnoseMapper joDiagnoseMapper;
+    @Test
+    public void test8(){
+        System.out.println(joDiagnoseMapper.getChineseJoDiagnoseByRegisterId(206));
+        System.out.println(joDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(206));
+    }
 }

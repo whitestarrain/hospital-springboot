@@ -2,6 +2,7 @@ package com.hospital.controller;
 
 import com.hospital.domain.MedicalRecord;
 import com.hospital.mapper.IMedicalRecordMapper;
+import com.hospital.service.IMedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/medicalRecord")
 public class MedicalRecordController {
     @Autowired
-    private IMedicalRecordMapper mapper;
-
+    private IMedicalRecordService medicalRecordService;
     @RequestMapping("/getByNum")
     public MedicalRecord getMedicalRecordByNum(int recordNum){
-        return mapper.getMedicalRecordByNum(recordNum);
+        return medicalRecordService.getMedicalRecordByNum(recordNum);
     }
 
-    @RequestMapping("/insert")
-    public void InsertMedicalRecord(MedicalRecord m){
-        mapper.InsertMedical(m);
+    @RequestMapping("/add")
+    public void addMedicalRecord(MedicalRecord m){
+        medicalRecordService.InsertOrUpdateMedicalRecord(m);
     }
 }

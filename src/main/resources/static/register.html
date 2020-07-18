@@ -233,7 +233,7 @@
 				},
 				registerFun: function() {
 					var _this = this;
-					
+
 					// 从上层获取用户id
 					var a = window.parent.document.getElementById("user-id").innerText;
 					axios.get("/register/doRegister", {
@@ -261,8 +261,9 @@
 			}
 		})
 
+
 		/* 信息验证 */
-		$("#registerdiv input,select").blur(function() {
+		var vertifacation = function() {
 			var flag = true;
 			$("#registerdiv input").each(function() {
 				// console.log($(this).val())
@@ -285,7 +286,11 @@
 			$("#registerbtn").prop({
 				disabled: !flag
 			})
-		})
+		}
+
+		$("#registerdiv input,select").blur(vertifacation)
+		$("#registerdiv input,select").mouseleave(vertifacation)
+		
 	</script>
 
 </html>

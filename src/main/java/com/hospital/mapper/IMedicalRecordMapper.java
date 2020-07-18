@@ -4,6 +4,7 @@ import com.hospital.domain.MedicalRecord;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +28,13 @@ public interface IMedicalRecordMapper {
     @Insert(" INSERT INTO medicalrecord VALUES (#{recordNum},#{symptom},#{nowHistory},#{anamnesis},#{allergyhis}," +
             "#{treatment},#{checkup},#{checkSugg},#{attention},#{result});")
     public void InsertMedical(MedicalRecord m);
+
+    @Update("UPDATE medicalrecord SET symptom = #{symptom},nowhistory =  #{nowHistory},anamnesis=#{anamnesis}," +
+            "allergyhis=#{allergyhis},treatment=#{treatment},checkup=#{checkup},checksugg=#{checkSugg}," +
+            "attention=#{attention} where recordnum = #{recordNum}")
+    public void updateMedicalRecord(MedicalRecord m);
+
+    @Select("SELECT COUNT(recordnum) FROM medicalrecord WHERE recordnum=#{recordNum}")
+    public int isHas(int recordNum);
+
 }

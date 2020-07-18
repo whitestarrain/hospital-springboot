@@ -117,7 +117,7 @@
 								<div class="col-sm-2">
 									<a href="">删除</a>
 									<span>/</span>
-									<a v-on:click="setDiagnoseType(2)">增加</a>
+									<a v-on:click="setDiagnoseType(1)">更改</a>
 								</div>
 							</div>
 						</div>
@@ -134,6 +134,17 @@
 									<td class="col-sm-5"></td>
 									<td class="col-sm-2">发病时间</td>
 								</tr>
+								<tr>
+									<td class="col-sm-1">
+										<div class="checkbox">
+											<input type="checkbox" />
+										</div>
+									</td>
+									<td class="col-sm-1">{{WesternDiagnose.icd}}</td>
+									<td class="col-sm-3">{{WesternDiagnose.diseaseName}}</td>
+									<td class="col-sm-5"></td>
+									<td class="col-sm-2">{{WesternDiagnose.diagnoseDate}}</td>
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -147,7 +158,7 @@
 								<div class="col-sm-2">
 									<a href="">删除</a>
 									<span>/</span>
-									<a v-on:click="setDiagnoseType(1)">增加</a>
+									<a v-on:click="setDiagnoseType(2)">更改</a>
 								</div>
 							</div>
 						</div>
@@ -163,6 +174,17 @@
 									<td class="col-sm-3">名称</td>
 									<td class="col-sm-5"></td>
 									<td class="col-sm-2">发病时间</td>
+								</tr>
+								<tr>
+									<td class="col-sm-1">
+										<div class="checkbox">
+											<input type="checkbox" />
+										</div>
+									</td>
+									<td class="col-sm-1">{{ChineseDiagnose.icd}}</td>
+									<td class="col-sm-3">{{ChineseDiagnose.diseaseName}}</td>
+									<td class="col-sm-5"></td>
+									<td class="col-sm-2">{{ChineseDiagnose.diagnoseDate}}</td>
 								</tr>
 							</table>
 						</div>
@@ -313,6 +335,7 @@
 				selectDiseaseId: "" //已绑定，可通过id可获取
 			},
 			methods: {
+				/* 按钮点击时更改已选疾病id */
 				selectDisease: function(id) {
 					this.selectDiseaseId = id;
 				}
@@ -339,9 +362,19 @@
 					attention: "",
 				},
 				diagnoseType: "", //已绑定，可通过id可获取
+				ChineseDiagnose: {
+					diseaseName: "111",
+					diagnoseDate: "2000-01-01",
+					icd: "1111"
+				},
+				WesternDiagnose: {
+					diseaseName: "111",
+					diagnoseDate: "2000-01-01",
+					icd: "1111"
+				}
 			},
 			methods: {
-				// 诊断数据调教
+				// 诊断数据提交
 				submit: function() {
 					var _this = this;
 					var o = window.parent.document.getElementById("recordNum").innerHTML;
@@ -349,7 +382,7 @@
 					var b = _this.diagnoseType
 					var c = document.getElementById("selectDiseaseId").value
 					//两个axios提交
-					axios.get("/medicalRecord/insert"), {
+					axios.get("/medicalRecord/add"), {
 						params: {
 							recordNum: o,
 							symptom: _this.medicalrecord.symptom,
@@ -370,17 +403,34 @@
 							selectDiseaseId: c
 						}
 					})
-					//TODO 调用左侧刷新
+
+					// 弹出刷新成功
+					toastr["success"]("提交成功!")
+
+					//禁止更改
+					$("#medicalrecord *").prop({
+						disabled: true
+					})
+
+					// 调用左侧刷新
+					setTimeout(function() {
+						window.parent.document.getElementById("refreshbtn").click()
+					}, 200)//200毫秒给vue缓冲
+
 					//TODO 上面按钮添加事件
 				},
 				setDiagnoseType: function(a) {
-					/* 弹出页面 */
-					toggleDisease(a)
-					this.diagnoseType = a;
+					var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
+					if(Selectedstatus==1){
+						toggleDisease(a)
+						this.diagnoseType = a;
+					}
 				}
 			},
 			beforeMount: function() {
+				/* 记录病历号 */
 				var recordNumVal = window.parent.document.getElementById("recordNum").innerHTML;
+				var rid = window.parent.document.getElementById("registerId").innerHTML;
 				var _this = this;
 				axios.get("/medicalRecord/getByNum", {
 					params: {
@@ -389,10 +439,26 @@
 				}).then(function(resp) {
 					_this.medicalrecord = resp.data;
 				})
+				axios.get("/diagnose/ChineseDiagnose", {
+					params: {
+						registerId: rid
+					}
+				}).then(function(resp) {
+					_this.ChineseDiagnose = resp.data
+				})
+				axios.get("/diagnose/WesternDiagnose", {
+					params: {
+						registerId: rid
+					}
+				}).then(function(resp) {
+					_this.WesternDiagnose = resp.data
+				})
+
 			}
 		})
 
 		/* 已诊的话就不能再改了 */
+
 		$(function() {
 			setTimeout(function() {
 				var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
@@ -415,9 +481,19 @@
 						"<tr><td class='col-sm-1'><div class='checkbox'><input type='checkbox' /></div></td><td class='col-sm-1'>" +
 						a[0].innerHTML + "</td><td class='col-sm-3'>" + a[1].innerHTML +
 						"</td><td class='col-sm-5'></td><td class='col-sm-2'><input type='date' /></td></tr>")
-					if (zx == 2) {
+					if (zx == 1) {
+						var trs=$("#xiyitable").find("tr");
+						for(var i= 1;i<trs.length;i++){
+							$(trs[i]).remove()
+						}
+						$("#xiyitable").remove("tr")
 						$("#xiyitable").append(tr)
 					} else {
+						var trs=$("#zhongyitable").find("tr");
+						for(var i= 1;i<trs.length;i++){
+							$(trs[i]).remove()
+						}
+						$("#zhongyitable").remove("tr")
 						$("#zhongyitable").append(tr);
 					}
 

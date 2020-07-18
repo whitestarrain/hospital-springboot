@@ -31,7 +31,7 @@
 		<div id="diagnose-window">
 			<div id="left-part">
 				<div id="left-up-part">
-					<p style="font-size: 14px;">患者选择：</p><a v-on:click="refreshRegister" class="glyphicon glyphicon-refresh btn btn-primary"></a>
+					<p style="font-size: 14px;">患者选择：</p><a id="refreshbtn" v-on:click="refreshRegister"  class="glyphicon glyphicon-refresh btn btn-primary"></a>
 				</div>
 				<div id="left-middle-part">
 					<form class="form-inline">
@@ -149,6 +149,9 @@
 					axios.get("/register/getCurrentDiagnosedRegister").then(function(resp) {
 						_this.diagnosedRegister = resp.data
 					})
+					
+					/* 刷新时,事件重新绑定 */
+					setTimeout(tableClick,300)
 				}
 			},
 			beforeMount: function() {
@@ -162,26 +165,29 @@
 			}
 
 		})
+		
+		/* 左侧列表添加点击事件 */
+		var tableClick = function(){
+			/* 点击切换右侧信息 */
+			$("#left-down-part table tr").click(function(e) {
+				$("#register-info").show()
+				$("#left-down-part table tr").removeClass("info")
+				$(this).addClass("info")
+				for (var i = 1; i <= 6; i++) {
+					var a = this.querySelector("td:nth-child(" + i + ")")
+					var b = document.querySelector("#register-info>span:nth-child(" + i + ")");
+					b.innerHTML = a.innerHTML
+				}
+				var temp = this.querySelector("td:nth-child(4)");
+				document.querySelector("#register-info>span:nth-child(4)").innerHTML = temp.innerHTML == 71 ? '男' : '女'
+				$("#diagnoseIframe").prop({
+					src: "./MedicalRecord.html"
+				})
+			})
+		}
 
 		$(function() {
-			setTimeout(function() {
-				/* 点击切换右侧信息 */
-				$("#left-down-part table tr").click(function(e) {
-					$("#register-info").show()
-					$("#left-down-part table tr").removeClass("info")
-					$(this).addClass("info")
-					for (var i = 1; i <= 6; i++) {
-						var a = this.querySelector("td:nth-child(" + i + ")")
-						var b = document.querySelector("#register-info>span:nth-child(" + i + ")");
-						b.innerHTML = a.innerHTML
-					}
-					var temp = this.querySelector("td:nth-child(4)");
-					document.querySelector("#register-info>span:nth-child(4)").innerHTML = temp.innerHTML == 71 ? '男' : '女'
-					$("#diagnoseIframe").prop({
-						src: "./MedicalRecord.html"
-					})
-				})
-			}, 500)
+			setTimeout(tableClick, 500)
 			/* 500毫秒给vue准备 */
 
 		})

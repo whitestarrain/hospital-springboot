@@ -1,5 +1,6 @@
 package com.hospital.mapper;
 
+import com.hospital.jo.JoDisease;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IDiagNoseMapper {
 
-    @Insert("CALL doc_diag (#{0},#{1},#{2})")
+    @Insert("CALL doc_diag (#{0},#{2},#{1})")
     public void diagnose(int registerid,int diseaseId,int diagnoseType);
+
+
 }

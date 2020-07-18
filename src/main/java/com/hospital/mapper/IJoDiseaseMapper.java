@@ -19,4 +19,5 @@ public interface IJoDiseaseMapper {
      */
     @Select("SELECT disease.*,diseasetype.name TYPE FROM disease,diseasetype WHERE disease.typeid = diseasetype.id LIMIT 0,4")
     public List<JoDisease> getJoDisease();
+
 }
