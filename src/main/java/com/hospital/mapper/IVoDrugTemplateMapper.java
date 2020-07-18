@@ -1,6 +1,6 @@
 package com.hospital.mapper;
 
-import com.hospital.jo.JoDrugTemplate;
+import com.hospital.vo.VoDrugTemplate;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface IJoDrugTemplateMapper {
+public interface IVoDrugTemplateMapper {
     /**
      * 根据处方id获取模版信息
      *
@@ -40,5 +40,5 @@ public interface IJoDrugTemplateMapper {
             "      FROM\n" +
             "        drugtempl \n" +
             "      WHERE presid = #{id})) t3")
-    public List<JoDrugTemplate> getJoDrugTemplateById(int id);
+    public List<VoDrugTemplate> getJoDrugTemplateById(int id);
 }

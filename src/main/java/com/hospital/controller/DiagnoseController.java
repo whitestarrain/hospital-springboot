@@ -1,9 +1,8 @@
 package com.hospital.controller;
 
-import com.hospital.jo.JoDiagnose;
+import com.hospital.vo.VoDiagnose;
 import com.hospital.mapper.IDiagNoseMapper;
-import com.hospital.mapper.IJoDiagnoseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.hospital.mapper.IVoDiagnoseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,7 @@ public class DiagnoseController {
     @Autowired
     private IDiagNoseMapper iDiagNoseMapper;
     @Autowired
-    private IJoDiagnoseMapper iJoDiagnoseMapper;
+    private IVoDiagnoseMapper iVoDiagnoseMapper;
 
     @RequestMapping("/doDiagnose")
     public void diagnose(int registerId,int diagnoseType,int selectDiseaseId){
@@ -25,13 +24,13 @@ public class DiagnoseController {
     }
 
     @RequestMapping("/ChineseDiagnose")
-    public JoDiagnose getChineseJoDiagnoseByRegisterId(int registerId){
-        return iJoDiagnoseMapper.getChineseJoDiagnoseByRegisterId(registerId);
+    public VoDiagnose getChineseJoDiagnoseByRegisterId(int registerId){
+        return iVoDiagnoseMapper.getChineseJoDiagnoseByRegisterId(registerId);
     }
 
     @RequestMapping("/WesternDiagnose")
-    public JoDiagnose getWesternJoDiagnoseByRegisterId(int registerId){
-        return iJoDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(registerId);
+    public VoDiagnose getWesternJoDiagnoseByRegisterId(int registerId){
+        return iVoDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(registerId);
     }
 
 }

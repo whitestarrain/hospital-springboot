@@ -2,13 +2,10 @@ package com.hospital.controller;
 
 import com.hospital.domain.Prescription;
 import com.hospital.domain.User;
-import com.hospital.jo.JoDrugTemplate;
-import com.hospital.mapper.IJoDrugTemplateMapper;
+import com.hospital.vo.VoDrugTemplate;
+import com.hospital.mapper.IVoDrugTemplateMapper;
 import com.hospital.mapper.IPrescriptionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +24,7 @@ public class PrescriptionController {
     @Autowired
     private IPrescriptionMapper prescriptionMapper;
     @Autowired
-    private IJoDrugTemplateMapper joDrugTemplateMapper;
+    private IVoDrugTemplateMapper voDrugTemplateMapper;
 
     @RequestMapping("/getAll")
     public List<Prescription> getAllPrescription() {
@@ -35,20 +32,20 @@ public class PrescriptionController {
     }
 
     @RequestMapping("/getTemplate")
-    public List<JoDrugTemplate> getTemplateById(int id) {
-        return joDrugTemplateMapper.getJoDrugTemplateById(id);
+    public List<VoDrugTemplate> getTemplateById(int id) {
+        return voDrugTemplateMapper.getJoDrugTemplateById(id);
     }
 
     @RequestMapping("/getTemplateByIds")
-    public List<JoDrugTemplate> getTemplateByIds(String ids) {
+    public List<VoDrugTemplate> getTemplateByIds(String ids) {
         if (ids.length() == 0 || "".equals(ids) || ids.split(",").length == 0) {
             return null;
         }
         String[] split = ids.split(",");
         int[] ints = Arrays.stream(split).mapToInt(Integer::parseInt).toArray();
-        ArrayList<JoDrugTemplate> list = new ArrayList<>();
+        ArrayList<VoDrugTemplate> list = new ArrayList<>();
         for (int i : ints) {
-            list.addAll(joDrugTemplateMapper.getJoDrugTemplateById(i));
+            list.addAll(voDrugTemplateMapper.getJoDrugTemplateById(i));
         }
 
         return list;

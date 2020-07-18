@@ -1,6 +1,5 @@
 package com.hospital.mapper;
 
-import com.hospital.jo.JoDisease;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

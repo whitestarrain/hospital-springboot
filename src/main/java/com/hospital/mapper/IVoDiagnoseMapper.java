@@ -1,6 +1,6 @@
 package com.hospital.mapper;
 
-import com.hospital.jo.JoDiagnose;
+import com.hospital.vo.VoDiagnose;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -10,27 +10,27 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Mapper
-public interface IJoDiagnoseMapper {
+public interface IVoDiagnoseMapper {
 
     /**
      * 获取中医诊断记录
      *
-     * @param num
+     * @param id
      * @return
      */
     @Select("SELECT diagnose.recordnum,diagnose.registerid,diagnose.diagtype,diagnose.diseaseid,diagnose.diagdate " +
             "insertTime,disease.name diseaseName,disease.icd FROM diagnose INNER JOIN disease ON diagnose" +
             ".diseaseid=disease.id WHERE registerid=#{id} AND diagtype=2")
-    public JoDiagnose getChineseJoDiagnoseByRegisterId(int id);
+    public VoDiagnose getChineseJoDiagnoseByRegisterId(int id);
 
     /**
      * 获取西医诊断记录
      *
-     * @param num
+     * @param id
      * @return
      */
     @Select("SELECT diagnose.recordnum,diagnose.registerid,diagnose.diagtype,diagnose.diseaseid,diagnose.diagdate " +
             "insertTime,disease.name diseaseName,disease.icd FROM diagnose INNER JOIN disease ON diagnose" +
             ".diseaseid=disease.id WHERE registerid=#{id} AND diagtype=1")
-    public JoDiagnose getWeaternJoDiagnoseByRegisterId(int id);
+    public VoDiagnose getWeaternJoDiagnoseByRegisterId(int id);
 }

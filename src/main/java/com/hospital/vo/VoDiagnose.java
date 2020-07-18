@@ -1,4 +1,4 @@
-package com.hospital.jo;
+package com.hospital.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 /**
  * @author liyu
  */
-public class JoDiagnose {
+public class VoDiagnose {
     private int recordNum;
     private int registerId;
     private int diagType;
@@ -18,7 +18,7 @@ public class JoDiagnose {
 
     @Override
     public String toString() {
-        return "JoDiagnose{" +
+        return "VoDiagnose{" +
                 "recordNum=" + recordNum +
                 ", registerId=" + registerId +
                 ", diagType=" + diagType +

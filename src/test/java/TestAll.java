@@ -2,7 +2,6 @@ import com.hospital.HisSpringBootApplication;
 import com.hospital.domain.MedicalRecord;
 import com.hospital.domain.Prescription;
 import com.hospital.domain.Register;
-import com.hospital.domain.User;
 import com.hospital.mapper.*;
 import com.hospital.service.IRegisterService;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Date;
 import java.util.List;
 
 
@@ -80,7 +78,7 @@ public class TestAll {
     }
 
     @Autowired
-    private IJoDiseaseMapper joDiseaseMapper;
+    private IVoDiseaseMapper joDiseaseMapper;
 
     @Test
     public void test6(){
@@ -106,7 +104,7 @@ public class TestAll {
         MedicalRecordMapper.updateMedicalRecord(m);
     }
     @Autowired
-    private IJoDiagnoseMapper joDiagnoseMapper;
+    private IVoDiagnoseMapper joDiagnoseMapper;
     @Test
     public void test8(){
         System.out.println(joDiagnoseMapper.getChineseJoDiagnoseByRegisterId(206));
@@ -121,7 +119,7 @@ public class TestAll {
     }
 
     @Autowired
-    private IJoDrugTemplateMapper joDrugTemplateMapper;
+    private IVoDrugTemplateMapper joDrugTemplateMapper;
     @Test
     public void test10(){
         System.out.println(joDrugTemplateMapper.getJoDrugTemplateById(2));
@@ -133,5 +131,12 @@ public class TestAll {
         p.setDocId(1);
         prescriptionMapper.insertPrescription(p);
         System.out.println(p.getId());
+    }
+
+    @Autowired
+    private IVoDrugDetailMapper joDrugDetailMapper;
+    @Test
+    public void test12(){
+        System.out.println(joDrugDetailMapper.getJoDrugDetailById(2));
     }
 }

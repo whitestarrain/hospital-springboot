@@ -1,9 +1,9 @@
-package com.hospital.jo;
+package com.hospital.vo;
 
 /**
  * @author liyu
  */
-public class JoDisease {
+public class VoDisease {
     private int id;
     private String name;
     private String icd;
@@ -12,7 +12,7 @@ public class JoDisease {
 
     @Override
     public String toString() {
-        return "JoDisease{" +
+        return "VoDisease{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", icd='" + icd + '\'' +

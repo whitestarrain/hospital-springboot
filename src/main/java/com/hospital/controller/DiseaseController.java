@@ -1,9 +1,8 @@
 package com.hospital.controller;
 
-import com.hospital.jo.JoDisease;
-import com.hospital.mapper.IJoDiseaseMapper;
+import com.hospital.vo.VoDisease;
+import com.hospital.mapper.IVoDiseaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,10 +15,10 @@ import java.util.List;
 @RequestMapping("/disease")
 public class DiseaseController {
     @Autowired
-    private IJoDiseaseMapper joDiseaseMapper;
+    private IVoDiseaseMapper VoDiseaseMapper;
 
     @RequestMapping("/getDiseases")
-    public List<JoDisease> getDiseases() {
-        return joDiseaseMapper.getJoDisease();
+    public List<VoDisease> getDiseases() {
+        return VoDiseaseMapper.getJoDisease();
     }
 }

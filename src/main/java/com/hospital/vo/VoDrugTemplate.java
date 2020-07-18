@@ -1,11 +1,11 @@
-package com.hospital.jo;
+package com.hospital.vo;
 
 import java.math.BigDecimal;
 
 /**
  * @author liyu
  */
-public class JoDrugTemplate {
+public class VoDrugTemplate {
     private int id;
     private String name;
     private String specification;
@@ -17,7 +17,7 @@ public class JoDrugTemplate {
 
     @Override
     public String toString() {
-        return "JoDrugTemplate{" +
+        return "VoDrugTemplate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", specification='" + specification + '\'' +

@@ -382,8 +382,8 @@
 					var b = _this.diagnoseType
 					var c = document.getElementById("selectDiseaseId").value
 					//两个axios提交
-					axios.get("/medicalRecord/add"), {
-						params: {
+					axios.get("/medicalRecord/add",{
+						params:{
 							recordNum: o,
 							symptom: _this.medicalrecord.symptom,
 							nowHistory: _this.medicalrecord.nowHistory,
@@ -394,7 +394,7 @@
 							checkSugg: _this.medicalrecord.checkSugg,
 							attention: _this.medicalrecord.attention
 						}
-					}
+					})
 
 					axios.get("/diagnose/doDiagnose", {
 						params: {

@@ -3,11 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="33a7a0e1-f9bb-4b4b-a3bd-7cc587ecb637" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DiagnoseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DiagnoseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DiseaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DiseaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/PrescriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/PrescriptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/jo/JoDrugTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/jo/JoDrugTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IPrescriptionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IPrescriptionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/lib/private/prescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/lib/private/prescription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/prescription.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/prescription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/jo/JoDiagnose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/vo/VoDiagnose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/jo/JoDisease.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/vo/VoDisease.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/jo/JoDrugTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/vo/VoDrugTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IDiagNoseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IDiagNoseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IJoDiagnoseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IVoDiagnoseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IJoDiseaseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IVoDiseaseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IJoDrugTemplateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IVoDrugTemplateMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestAll.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +40,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -111,11 +119,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestAll.test8" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAll.test12" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hospital" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestAll" />
-      <option name="METHOD_NAME" value="test8" />
+      <option name="METHOD_NAME" value="test12" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -147,10 +155,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.HisSpringBootApplication" />
+        <item itemvalue="JUnit.TestAll.test12" />
         <item itemvalue="JUnit.TestAll.test11" />
         <item itemvalue="JUnit.TestAll.test10" />
         <item itemvalue="JUnit.TestAll.test9" />
-        <item itemvalue="JUnit.TestAll.test8" />
       </list>
     </recent_temporary>
   </component>
@@ -185,7 +193,7 @@
       <workItem from="1594965063536" duration="20520000" />
       <workItem from="1594991088257" duration="8356000" />
       <workItem from="1595024631735" duration="20200000" />
-      <workItem from="1595049859490" duration="12648000" />
+      <workItem from="1595049859490" duration="17748000" />
     </task>
     <servers />
   </component>
@@ -193,10 +201,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1595056737106">
+    <state x="494" y="225" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595066362537">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1595056737106" />
+    <state x="494" y="225" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.871@0.0.1549.871" timestamp="1595066362537" />
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1595067696594">
+      <screen x="0" y="0" width="1549" height="871" />
+    </state>
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1595067696594" />
     <state x="442" y="352" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1595049889220">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
@@ -205,38 +217,42 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="563" y="276" width="423" height="321" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1549.871@0.0.1549.871" timestamp="1594949450989" />
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1595062938429">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1595067408792">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595062938429" />
-    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1595062938429">
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1549.871@0.0.1549.871" timestamp="1595067408792" />
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1595068273576">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1595062938429" />
-    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1595062938429">
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595068273576" />
+    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1595068273575">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1595062938429" />
-    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1595062938429">
+    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1595068273575" />
+    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1595068273575">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1595062938429" />
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1595062938430">
+    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1595068273575" />
+    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1595068273575">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595062938430" />
-    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1595062938430">
+    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1595068273575" />
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1595068273576">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1595062938430" />
-    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1595062938430">
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595068273576" />
+    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1595068273576">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1595062938430" />
-    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1595062938430">
+    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1595068273576" />
+    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1595068273576">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1595062938430" />
+    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1595068273576" />
+    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1595068273576">
+      <screen x="0" y="0" width="1549" height="871" />
+    </state>
+    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1595068273576" />
     <state width="1506" height="272" key="GridCell.Tab.2.bottom" timestamp="1594912055868">
       <screen x="0" y="0" width="1549" height="871" />
     </state>

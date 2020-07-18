@@ -87,12 +87,12 @@
 				</div>
 				<div id="right-up-part">
 					<ul class="nav nav-tabs">
-						<li role="presentation" class="active"><a id="diagnose_medicalReocrd_UpTo_a" href="javascript:diagnose_medicalReocrd_UpTo()" style="padding-right: 18px;padding-left: 19px;">病历首页</a></li>
+						<li role="presentation" class="active"><a id="diagnose_medicalReocrd_UpTo_a" href="javascript:void(0)" style="padding-right: 18px;padding-left: 19px;">病历首页</a></li>
 						<li role="presentation"><a href="#">检查申请*</a></li>
 						<li role="presentation"><a href="#">检验申请*</a></li>
 						<li role="presentation"><a href="#">门诊确诊*</a></li>
 						<li role="presentation"><a href="#">处置申请*</a></li>
-						<li role="presentation"><a href="javascript:diagnose_Prescription_UpTo()">成药处方</a></li>
+						<li role="presentation"><a id="chengyaochufang"  href="javascript:void(0)">成药处方</a></li>
 						<li role="presentation"><a href="#">草药处方*</a></li>
 						<li role="presentation"><a href="#">费用查询*</a></li>
 					</ul>
@@ -168,8 +168,14 @@
 		
 		/* 左侧列表添加点击事件 */
 		var tableClick = function(){
-			/* 点击切换右侧信息 */
+			
 			$("#left-down-part table tr").click(function(e) {
+				/* 一旦点击左侧后是病历首页可点 */
+				$("#diagnose_medicalReocrd_UpTo_a").prop({
+					href:"javascript:diagnose_medicalReocrd_UpTo()"
+				})
+					
+					// 左侧效果变化
 				$("#register-info").show()
 				$("#left-down-part table tr").removeClass("info")
 				$(this).addClass("info")
@@ -187,12 +193,28 @@
 				// })
 				// 代替
 				document.getElementById("diagnose_medicalReocrd_UpTo_a").click()
+				
+				
+				 /* 成药处方界面不是随便进的 */
+				$("#chengyaochufang").prop({
+					href:"javascript:void(0)"
+				})
+				
+				/* 根据状态使成药处方选项可点 */
+				var status = document.querySelector("#Selectedstatus").innerText;
+				
+				if(status == 2){
+					$("#chengyaochufang").prop({
+						href:"javascript:diagnose_Prescription_UpTo()"
+					})
+				}
+				
 			})
 		}
 
 		$(function() {
-			setTimeout(tableClick, 500)
-			/* 500毫秒给vue准备 */
+			setTimeout(tableClick, 300)
+			/* 300毫秒给vue准备 */
 
 		})
 	</script>

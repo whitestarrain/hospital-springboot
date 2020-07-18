@@ -29,7 +29,7 @@ public class RegisterController {
     public int register(Register registerdata) {
         int invoiceNum = rs.register(registerdata);
 
-       return invoiceNum;
+        return invoiceNum;
     }
 
     @RequestMapping("/getRegisterByMedicalRecord")
@@ -45,12 +45,12 @@ public class RegisterController {
     }
 
     @RequestMapping("/getCurrentNoDiagnoseRegister")
-    public List<Register> getCurrentNoDiagnoseRegister(){
+    public List<Register> getCurrentNoDiagnoseRegister() {
         return rs.getCurrentNoDiagnoseRegister();
     }
 
     @RequestMapping("/getCurrentDiagnosedRegister")
-    public List<Register> getCurrentDiagnosedRegister(){
+    public List<Register> getCurrentDiagnosedRegister() {
         return rs.getCurrentDiagnosedRegister();
     }
 }
