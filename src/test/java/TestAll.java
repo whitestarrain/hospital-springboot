@@ -108,8 +108,8 @@ public class TestAll {
     private IVoDiagnoseMapper joDiagnoseMapper;
     @Test
     public void test8(){
-        System.out.println(joDiagnoseMapper.getChineseJoDiagnoseByRegisterId(206));
-        System.out.println(joDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(206));
+        System.out.println(joDiagnoseMapper.getChineseJoDiagnoseByRegisterId(209));
+        System.out.println(joDiagnoseMapper.getWeaternJoDiagnoseByRegisterId(209));
     }
     @Autowired
     private IPrescriptionMapper prescriptionMapper;
@@ -165,8 +165,10 @@ public class TestAll {
 
     @Test
     public void test16(){
-        prescriptionMapper.pay(33, 2, 1);
-        System.out.println(invoiceMapper.SelectMaxInvoiceNum());
+//        prescriptionMapper.pay(33, 2, 1);
+//        System.out.println(invoiceMapper.SelectMaxInvoiceNum());
+        int registedNumByDocId = registerMapper.getRegistedNumByDocId(1);
+        System.out.println(registedNumByDocId);
     }
 
 }

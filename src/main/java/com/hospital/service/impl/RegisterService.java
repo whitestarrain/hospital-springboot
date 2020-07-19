@@ -60,4 +60,9 @@ public class RegisterService implements IRegisterService {
     public List<Register> getCurrentDiagnosedRegister(int doctorId) {
         return registerMapper.getCurrentDiagnosedRegister(doctorId);
     }
+
+    @Override
+    public int getRegistedNumByDocId(int docId) {
+        return registerMapper.getRegistedNumByDocId(docId);
+    }
 }

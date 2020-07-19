@@ -186,7 +186,7 @@
 					payWay: 1
 				},
 				selectRegisterId: 0,
-				registerIds: [1, 2],
+				registerIds: [],
 				consumeInfo: [],
 				allMoney: 0,
 				payMoney: 0,
@@ -222,13 +222,26 @@
 						for (var i = 0; i < info.length; i++) {
 							sum += parseFloat(info[i].presPrice)
 						}
-						
-						if(info[1].status != 1){ // 只有未缴费的可以缴费
+						if (info.length == 0) {
 							$("#Settlement").prop({
-								disabled:true
+								disabled: true
 							})
+						} else {
+							if (info.length > 0) {
+								if (info[0].status != 1) { // 只有未缴费的可以缴费
+									$("#Settlement").prop({
+										disabled: true
+									})
+								}
+							}
+
 						}
+						// 设置金钱总额
 						_this.allMoney = sum.toFixed(2)
+						// 付钱初始化为0
+						_this.payMoney = 0
+						// 刷新应找回金钱
+						_this.getReturnMoney();
 					})
 				},
 				getInfoAndConsumeInfo: function() { // 设置页面基本信息和消费信息
@@ -236,7 +249,7 @@
 						return
 					}
 					$("#Settlement").prop({
-						disabled:false
+						disabled: false
 					})
 					this.getInfo(this.selectRegisterId)
 					this.getConsumeInfo(this.selectRegisterId)
@@ -252,7 +265,7 @@
 					})
 				},
 				pay: function() {
-					var _this =this
+					var _this = this
 					// 进行支付
 					axios.get("/prescription/pay", {
 						params: {
@@ -267,19 +280,25 @@
 						_this.invoiceNum = resp.data
 						toastr["success"]("支付成功，发票号为" + _this.invoiceNum + "")
 						$("#Settlement").prop({
-							disabled:true // 缴费后不能再缴费
+							disabled: true // 缴费后不能再缴费
 						})
 					})
 
 				},
 				getReturnMoney: function() {
-					if (this.payMoney == null || this.payMoney == "") {
+					if (this.payMoney == null || this.payMoney === "") {
 						return
 					}
 					if (this.payMoney - this.allMoney < 0) {
 						this.returnMoney = "支付不足"
+						$("#payfeebtn").prop({
+							disabled:true
+						})
 						return
 					}
+					$("#payfeebtn").prop({
+						disabled:false
+					})
 					this.returnMoney = (this.payMoney - this.allMoney).toFixed(2)
 				}
 			},
@@ -311,8 +330,6 @@
 		$("#Settlement").click(function() {
 			$("#invoice-Modal").modal()
 		})
-
-
 	</script>
 
 </html>

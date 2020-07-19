@@ -58,4 +58,11 @@ public interface IRegisterMapper {
      */
     @Select("select id from register where medicalrecord = #{recordNum} and diagdate = curdate()")
     public List<Integer> getRegisterIdsByRecordNum(int recordNum);
+
+    /**
+     * 根据医生的id查找已经有多少个人往他那儿挂号
+     * @return
+     */
+    @Select("select count(id) from register where doctorid = #{id} and diagdate = curdate()")
+    public int getRegistedNumByDocId(int docId);
 }

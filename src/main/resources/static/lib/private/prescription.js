@@ -450,23 +450,7 @@ function showOverlay() {
 	$('.overlay').show();
 }
 
-// 诊毕患者不能再进行诊断
-// $(function() {
-// 	var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
-// 	if (Selectedstatus == 3) {
-// 		setTimeout(function() {
-// 			$("*").prop({
-// 				disabled: true
-// 			})
-// 		}, 300)
-
-// 	}
-// })
-
-
-
-// TODO  诊毕
-
-// 删药
-
-// 更改时中西医的清除
+// 作废也就是重新加载
+$("#zuofei").click(function() {
+	window.parent.document.getElementById("chengyaochufang").click()
+})

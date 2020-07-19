@@ -66,4 +66,9 @@ public class RegisterController {
     public Register getRegisterById(int registerId){
         return rs.selectById(registerId);
     }
+
+    @RequestMapping("/getRegistedNumByDocId")
+    public int getRegistedNumByDocId(int id){
+        return rs.getRegistedNumByDocId(id);
+    }
 }

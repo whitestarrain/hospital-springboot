@@ -117,8 +117,8 @@
 					<label for="exampleInputName13">看诊医生：</label>
 
 					<!-- 根据上面条件进行医生筛选 -->
-					<select id="selectdoctorid" class="form-control" v-model="registerdata.doctorId" style="width: 100px;">
-						<option value="0">请选择</option>
+					<select id="selectdoctorid" class="form-control" v-model="registerdata.doctorId" v-on:change="setUseNum" style="width: 100px;">
+						<option value="0">--请选择--</option>
 						<option v-for="(d) in doctors" v-bind:value="d.id">{{d.name}}</option>
 					</select>
 				</div>
@@ -187,7 +187,7 @@
 					diagDate: "",
 					noon: "上",
 					depaId: 1,
-					doctorId: "0",
+					doctorId: 0,
 					needRecord: true,
 				},
 				invoiceNum: "挂号后生成",
@@ -228,7 +228,8 @@
 						}
 					}).then(function(response) {
 						_this.doctors = response.data;
-						_this.limitNum = _this.registerLevel == 1 ? 20 : 30
+						_this.limitNum = _this.registerLevel == 1 ? 20 : 30,
+						_this.registerdata.doctorId = 0
 					})
 				},
 				registerFun: function() {
@@ -256,6 +257,22 @@
 					}).then(function(resp) {
 						_this.invoiceNum = resp.data
 						toastr["success"]("挂号成功!");
+					})
+				},
+				setUseNum:function(){
+					// 设置已用号额
+					var _this = this;
+					axios.get("/register/getRegistedNumByDocId",{
+						params:{
+							id:_this.registerdata.doctorId
+						}
+					}).then(function(resp){
+						_this.useNum = resp.data
+						if(resp.data>=_this.limitNum){
+							$("#registerbtn").prop({
+								disabled:true
+							})
+						}
 					})
 				}
 			}

@@ -30,4 +30,6 @@ public interface IRegisterService {
     public List<Register> getCurrentDiagnosedRegister(int doctorId);
 
     public List<Integer> getRegisterIdsByRecordNum(int recordNum);
+
+    public int getRegistedNumByDocId(int docId);
 }
