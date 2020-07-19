@@ -1,10 +1,7 @@
 package com.hospital.mapper;
 
 import com.hospital.domain.Prescription;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,4 +27,6 @@ public interface IPrescriptionMapper {
     @Insert("CALL doct_prescribe(#{0},#{1})")
     public void doPrescription(int registerId,String ids);
 
+    @Update("call patient_pay(#{0},#{1},#{2})")
+    void pay(int registerId, int userId, int payWay);
 }

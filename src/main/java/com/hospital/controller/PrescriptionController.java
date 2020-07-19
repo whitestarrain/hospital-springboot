@@ -2,6 +2,7 @@ package com.hospital.controller;
 
 import com.hospital.domain.Prescription;
 import com.hospital.domain.User;
+import com.hospital.mapper.IInvoiceMapper;
 import com.hospital.mapper.IPrescribeMapper;
 import com.hospital.vo.VoDrugTemplate;
 import com.hospital.mapper.IVoDrugTemplateMapper;
@@ -29,6 +30,8 @@ public class PrescriptionController {
 
     @Autowired
     private IPrescribeMapper prescribeMapper;
+    @Autowired
+    private IInvoiceMapper invoiceMapper;
 
     @RequestMapping("/getAll")
     public List<Prescription> getAllPrescription() {
@@ -73,5 +76,11 @@ public class PrescriptionController {
     @RequestMapping("/getPrescripted")
     public List<String> getPrescripted(int registerId){
         return prescribeMapper.getPrescripted(registerId);
+    }
+
+    @RequestMapping("/pay")
+    public int pay(int userId,int payWay,int registerId){
+        prescriptionMapper.pay(registerId,userId,payWay);
+        return invoiceMapper.SelectMaxInvoiceNum();
     }
 }

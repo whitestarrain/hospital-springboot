@@ -54,9 +54,9 @@
 					<button type="submit" class="btn btn-primary" v-on:click="getRegisterIds">
 						<span class="glyphicon glyphicon-search"></span> 搜索
 					</button>
-					
+
 					<select class="form-control" style="margin-left: 20px;" v-model="selectRegisterId" v-on:change="getInfoAndConsumeInfo">
-						<option value ="0">--请选择挂号id--</option>
+						<option value="0">--请选择挂号id--</option>
 						<option v-for="(r) in registerIds" v-bind:value="r">{{r}}</option>
 					</select>
 
@@ -67,11 +67,11 @@
 					</div>
 					<div class="form-group col-md-3">
 						<label for="exampleInputName4">身份证号：</label>
-						<input type="text" class="form-control" id="exampleInputName4" placeholder="身份证号" v-model="register.address" />
+						<input type="text" class="form-control" id="exampleInputName4" placeholder="身份证号" v-model="register.idNumber" />
 					</div>
 					<div class="form-group col-md-6">
 						<label for="exampleInputName5">家庭住址：</label>
-						<input type="text" class="form-control" id="exampleInputName5" style="width: 50%;" placeholder="家庭住址" v-model="register.idNumber" />
+						<input type="text" class="form-control" id="exampleInputName5" style="width: 50%;" placeholder="家庭住址" v-model="register.address" />
 					</div>
 					<h5 class="col-md-12 clearfix">患者消费信息：</h5>
 				</div>
@@ -91,11 +91,11 @@
 							<td>{{i.presName}}</td>
 							<td>{{i.presPrice}}</td>
 							<td>{{i.presDate}}</td>
-							<td>{{i.status}}</td>
+							<td>{{i.status==1?'未缴费':'已缴费'}}</td>
 						</tr>
 
 					</table>
-					<button id="Settlement" type="button" class="btn btn-primary">收费结算</button>
+					<button id="Settlement" type="button" class="btn btn-primary" disabled="disabled">收费结算</button>
 				</div>
 			</div>
 
@@ -163,7 +163,7 @@
 						</div>
 						<div class="modal-footer text-center" style="text-align: center;">
 							<button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
-							<button type="button" id="payfeebtn" class="btn btn-primary" data-dismiss="modal">收费</button>
+							<button type="button" id="payfeebtn" class="btn btn-primary" data-dismiss="modal" v-on:click="pay">收费</button>
 						</div>
 					</div>
 				</div>
@@ -177,16 +177,16 @@
 		new Vue({
 			el: "#bodyContainer",
 			data: {
-				recordNum:"",// 病历号
-				register: {// 当前选中Register的信息显示
+				recordNum: "", // 病历号
+				register: { // 当前选中Register的信息显示
 					id: "",
 					name: "",
 					address: "",
 					idNumber: "",
 					payWay: 1
 				},
-				selectRegisterId:0,
-				registerIds:[1,2], 
+				selectRegisterId: 0,
+				registerIds: [1, 2],
 				consumeInfo: [],
 				allMoney: 0,
 				payMoney: 0,
@@ -195,73 +195,88 @@
 				user_id: ""
 			},
 			methods: {
-				getInfo: function(r) {// 设置页面基本信息
+				getInfo: function(r) { // 设置页面基本信息
 					var _this = this
 					var id = r
 					axios.get("/register/getRegisterById", {
 						params: {
-							registerId:id
+							registerId: id
 						}
 					}).then(function(resp) {
 						// 获取信息
 						_this.register = resp.data
 					})
 				},
-				getConsumeInfo:function(r) {// 设置消费信息
+				getConsumeInfo: function(r) { // 设置消费信息
 					var _this = this
 					var id = r
 					axios.get("/voConsumeInfo/getInfoByRegisterId", {
 						params: {
-							registerId:id
+							registerId: id
 						}
 					}).then(function(resp) {
 						// 获取信息
 						var info = resp.data;
 						var sum = 0;
 						_this.consumeInfo = info
-						for(var i = 0; i<info.length;i++){
+						for (var i = 0; i < info.length; i++) {
 							sum += parseFloat(info[i].presPrice)
+						}
+						
+						if(info[1].status != 1){ // 只有未缴费的可以缴费
+							$("#Settlement").prop({
+								disabled:true
+							})
 						}
 						_this.allMoney = sum.toFixed(2)
 					})
 				},
-				getInfoAndConsumeInfo:function(){// 设置页面基本信息和消费信息
-					if(this.selectRegisterId == 0){
+				getInfoAndConsumeInfo: function() { // 设置页面基本信息和消费信息
+					if (this.selectRegisterId == 0) {
 						return
 					}
+					$("#Settlement").prop({
+						disabled:false
+					})
 					this.getInfo(this.selectRegisterId)
 					this.getConsumeInfo(this.selectRegisterId)
 				},
-				getRegisterIds:function(){
+				getRegisterIds: function() {
 					var _this = this
-					axios.get("/register/getRegisterIdsByRecordNum",{
-						params:{
-							recordNum:_this.recordNum
+					axios.get("/register/getRegisterIdsByRecordNum", {
+						params: {
+							recordNum: _this.recordNum
 						}
-					}).then(function(resp){
+					}).then(function(resp) {
 						_this.registerIds = resp.data
 					})
 				},
 				pay: function() {
+					var _this =this
 					// 进行支付
 					axios.get("/prescription/pay", {
 						params: {
-							userId: user_id,
-							payWay: register.payWay,
-							registerId: register.id
+							userId: _this.user_id,
+							payWay: _this.register.payWay,
+							registerId: _this.register.id
 						}
-					}).then(function() {
+					}).then(function(resp) {
 						// 更新支付状态
+						_this.getInfoAndConsumeInfo();
 						// 设置发票号
+						_this.invoiceNum = resp.data
+						toastr["success"]("支付成功，发票号为" + _this.invoiceNum + "")
+						$("#Settlement").prop({
+							disabled:true // 缴费后不能再缴费
+						})
 					})
 
-					toastr["success"]("支付成功，发票号为" + this.invoiceNum + "")
 				},
-				getReturnMoney:function(){
-					if(this.payMoney == null||this.payMoney == ""){
+				getReturnMoney: function() {
+					if (this.payMoney == null || this.payMoney == "") {
 						return
 					}
-					if(this.payMoney - this.allMoney<0){
+					if (this.payMoney - this.allMoney < 0) {
 						this.returnMoney = "支付不足"
 						return
 					}
@@ -298,9 +313,6 @@
 		})
 
 
-		$("#payfeebtn").click(function() {
-			toastr["success"]("支付成功!")
-		})
 	</script>
 
 </html>

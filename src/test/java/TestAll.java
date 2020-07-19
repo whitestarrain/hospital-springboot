@@ -163,4 +163,10 @@ public class TestAll {
         System.out.println(consumeInfo);
     }
 
+    @Test
+    public void test16(){
+        prescriptionMapper.pay(33, 2, 1);
+        System.out.println(invoiceMapper.SelectMaxInvoiceNum());
+    }
+
 }
