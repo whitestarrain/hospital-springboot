@@ -68,8 +68,8 @@ public class TestAll {
 
     @Test
     public void test4(){
-        List<Register> temp = registerMapper.getCurrentNoDiagnoseRegister();
-        System.out.println(temp);
+//        List<Register> temp = registerMapper.getCurrentNoDiagnoseRegister();
+//        System.out.println(temp);
     }
     @Autowired
     private IMedicalRecordMapper MedicalRecordMapper;

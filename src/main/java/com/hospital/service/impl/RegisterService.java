@@ -47,8 +47,8 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
-    public List<Register> getCurrentNoDiagnoseRegister() {
-        return registerMapper.getCurrentNoDiagnoseRegister();
+    public List<Register> getCurrentNoDiagnoseRegister(int doctorId) {
+        return registerMapper.getCurrentNoDiagnoseRegister(doctorId);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
-    public List<Register> getCurrentDiagnosedRegister() {
-        return registerMapper.getCurrentDiagnosedRegister();
+    public List<Register> getCurrentDiagnosedRegister(int doctorId) {
+        return registerMapper.getCurrentDiagnosedRegister(doctorId);
     }
 }

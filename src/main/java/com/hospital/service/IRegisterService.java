@@ -25,9 +25,9 @@ public interface IRegisterService {
 
     public Register selectById(int id);
 
-    public List<Register> getCurrentNoDiagnoseRegister();
+    public List<Register> getCurrentNoDiagnoseRegister(int doctorId);
 
-    public List<Register> getCurrentDiagnosedRegister();
+    public List<Register> getCurrentDiagnosedRegister(int doctorId);
 
     public List<Integer> getRegisterIdsByRecordNum(int recordNum);
 }

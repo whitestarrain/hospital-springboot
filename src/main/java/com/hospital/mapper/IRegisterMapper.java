@@ -41,15 +41,15 @@ public interface IRegisterMapper {
      * 获得所有今天要诊断但未诊的挂号记录
      * @return 今天要诊断但未诊的挂号记录
      */
-    @Select(" SELECT * FROM register WHERE diagdate = CURDATE() AND STATUS = 1")
-    public List<Register> getCurrentNoDiagnoseRegister();
+    @Select(" SELECT * FROM register WHERE diagdate = CURDATE() AND STATUS = 1 AND doctorid = #{doctorid}")
+    public List<Register> getCurrentNoDiagnoseRegister(int doctorid);
 
     /**
      * 获得所有今天已诊断的记录，包括开药后诊毕的
      * @return 获得所有今天已诊断的记录
      */
-    @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND (STATUS = 2 or status = 3)")
-    public List<Register> getCurrentDiagnosedRegister();
+    @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND (STATUS = 2 OR STATUS = 3) AND doctorid = #{doctorId}")
+    public List<Register> getCurrentDiagnosedRegister(int doctorId);
 
     /**
      * 根据病历号获得今天的所有挂号id
