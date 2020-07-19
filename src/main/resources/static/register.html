@@ -256,6 +256,7 @@
 					}).then(function(resp) {
 						_this.invoiceNum = resp.data
 						toastr["success"]("挂号成功!");
+						_this.setUseNum()
 					})
 				},
 				setUseNum:function(){
