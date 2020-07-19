@@ -24,12 +24,24 @@
 		#table19 td{
 			line-height: 35px;
 		}
+		.overlay {   
+		    position: absolute;   
+		    top: 0px;   
+		    left: 0px;   
+		    z-index: 10001;   
+		    display:none;   
+		    filter:alpha(opacity=60);   
+		    background-color: #777;   
+		    opacity: 0.5;   
+		    -moz-opacity: 0.5;   
+		}  
 	</style>
 
 	</head>
 
 	<body>
-		<div style="padding: 20px;padding-top: 5px;">
+		<div id="overlay" class="overlay"></div>  
+		<div id="maindiv" style="padding: 20px;padding-top: 5px;">
 			<div class="container-fluid" style="margin-bottom: 10px;">
 				<div class="row">
 					<div class="col-sm-2 text-primary highlight text-center border-line" style="background-color: #eef6fe; line-height: 30px;">
@@ -80,6 +92,7 @@
 							<td style="width: 60%;">模版名称</td>
 							<td style="width: 30%;">状态</td>
 						</tr>
+						
 					</table>
 				</div>
 				<div class="border-line shadow" style="float: right;width:
@@ -353,6 +366,7 @@
 					<div class="modal-footer text-center" style="text-align: center;">
 						<button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
 						<button type="button" id="adddurgbtn" class="btn btn-primary" data-dismiss="modal">添加</button>
+						<input type="hidden" id="selectedDrug" value="" />
 					</div>
 				</div>
 			</div>

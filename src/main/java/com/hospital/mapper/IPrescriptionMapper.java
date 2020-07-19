@@ -29,4 +29,5 @@ public interface IPrescriptionMapper {
 
     @Insert("CALL doct_prescribe(#{0},#{1})")
     public void doPrescription(int registerId,String ids);
+
 }

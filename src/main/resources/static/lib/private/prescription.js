@@ -136,23 +136,25 @@ new Vue({
 			pack: "",
 			form: "",
 			type: ""
-		}]
+		}],
+		mess: {
+
+		}
 	},
 	methods: {
-		addDrug: function(a) {
+		addDrug: function(a) { // 设置当前选中药品id到隐藏域中
 			var drugId = a;
-			// flag用来记录是否有选中的
+			// flag用来记录是否有选中的处方
 			var flag = false;
 			var prescriptionIdV;
 			var radios = $("#selectedPrescriptions input[type=radio]")
-			// 获得当前处方id
 			for (var i = 0; i < radios.length; i++) {
 				if (radios[i].checked) {
 					flag = true;
-					prescriptionIdV = ($(radios[i]).parent().parent().children())[0].value
 					break;
 				}
 			}
+
 			// 没有选中处方时跳出
 			if (!flag) {
 				toastr["info"]("请选择处方id")
@@ -165,6 +167,7 @@ new Vue({
 					break;
 				}
 			}
+			$("#selectedDrug").val(selectedDrug.id)
 
 			var div = $("#addDrugDetails")[0]
 			// 设置信息
@@ -174,55 +177,11 @@ new Vue({
 			div.querySelector("div[class='form-group row']:nth-child(4)>div:nth-child(2)>input").value = selectedDrug.pack
 
 
-			// 弹出药品详细界面
+			// 弹出药品模版详细界面
 			$("#use-drug-Modal").modal()
 
-			var mess = {
-				d: drugId,
-				p: prescriptionIdV
-			}
-
-			// 注册个确认按钮的点击事件（目的是为了传入选中的药品id和处方id）
-			$("#adddurgbtn").click(mess, function(event) {
-				var mess = event.data;
-				var div = $("#addDrugDetails")[0]
-				// 	TODO
-				// 从页面搜取必要信息
-				var useWay = div.querySelector("div[class='form-group row']:nth-child(5)>div:nth-child(2)>input").value
-				var dosage = div.querySelector("div[class='form-group row']:nth-child(6)>div:nth-child(2)>input").value
-				var frequency = div.querySelector("div[class='form-group row']:nth-child(7)>div:nth-child(2)>input").value
-				var number = div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value
-				// ajax请求，数据库插入
-				axios.get("/drug/insertDrugTemplate", {
-					params: {
-						presId: mess.p,
-						drugId: mess.d,
-						"useWay": useWay,
-						"dosage": dosage,
-						"frequency": frequency,
-						"number": number
-					}
-				}).then(function(resp) {
-					if (resp.data > 0) {
-						toastr["error"]("不能添加重复药品")
-					} else {
-						toastr["success"]("添加成功")
-						// 右上table数据更新:updateRightTop函数
-						updateRightTop()
-					}
 
 
-					// 表格内数据可以清除
-					div.querySelector("div[class='form-group row']:nth-child(5)>div:nth-child(2)>input").value = ""
-					div.querySelector("div[class='form-group row']:nth-child(6)>div:nth-child(2)>input").value = ""
-					div.querySelector("div[class='form-group row']:nth-child(7)>div:nth-child(2)>input").value = ""
-					div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value = ""
-					
-					//关闭药品选择框
-					$("#drugs").slideToggle("fast")
-				})
-
-			})
 		}
 	},
 	beforeMount: function() {
@@ -232,6 +191,60 @@ new Vue({
 		})
 	}
 })
+
+function adddrugbtnListener(event) {
+
+	var prescriptionId;
+	var radios = $("#selectedPrescriptions input[type=radio]")
+	// 获得当前处方id
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i].checked) {
+			prescriptionId = ($(radios[i]).parent().parent().children())[0].value
+			break;
+		}
+	}
+	var drugId = $("#selectedDrug").val()
+
+
+	var div = $("#addDrugDetails")[0]
+	// 	TODO
+	// 从页面搜取必要信息
+	var useWay = div.querySelector("div[class='form-group row']:nth-child(5)>div:nth-child(2)>input").value
+	var dosage = div.querySelector("div[class='form-group row']:nth-child(6)>div:nth-child(2)>input").value
+	var frequency = div.querySelector("div[class='form-group row']:nth-child(7)>div:nth-child(2)>input").value
+	var number = div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value
+	// ajax请求，数据库插入
+	axios.get("/drug/insertDrugTemplate", {
+		params: {
+			presId: prescriptionId,
+			"drugId": drugId,
+			"useWay": useWay,
+			"dosage": dosage,
+			"frequency": frequency,
+			"number": number
+		}
+	}).then(function(resp) {
+		if (resp.data > 0) {
+			toastr["error"]("不能添加重复药品")
+		} else {
+			toastr["success"]("添加成功")
+			// 右上table数据更新:updateRightTop函数
+			updateRightTop()
+		}
+
+		// 表格内数据可以清除
+		div.querySelector("div[class='form-group row']:nth-child(5)>div:nth-child(2)>input").value = ""
+		div.querySelector("div[class='form-group row']:nth-child(6)>div:nth-child(2)>input").value = ""
+		div.querySelector("div[class='form-group row']:nth-child(7)>div:nth-child(2)>input").value = ""
+		div.querySelector("div[class='form-group row']:nth-child(8)>div:nth-child(2)>input").value = ""
+
+		//关闭药品选择框
+		$("#drugs").slideToggle("fast")
+	})
+
+}
+
+$("#adddurgbtn").click(adddrugbtnListener)
 
 /* 处方列表添加点击后效果事件 */
 function setEffect() {
@@ -374,6 +387,12 @@ $("#kaili").click(function() {
 		}
 	}).then(function() {
 		toastr["success"]("开立成功")
+		// 遮罩层
+		showOverlay();
+		// 左侧数据刷新
+		setTimeout(function() {
+			window.parent.document.getElementById("refreshbtn").click()
+		}, 200)
 	})
 })
 
@@ -395,6 +414,55 @@ $("#cancel-select").click(function() {
 $("#cancelAddDrug").click(function() {
 	$("#drugs").slideToggle("fast")
 })
+
+
+// 诊毕患者的处理
+setTimeout(function() {
+	var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
+	var rid = window.parent.document.getElementById("registerId").innerHTML;
+	var _this = this
+	// 显示诊毕患者的记录
+	if (Selectedstatus == 3) {
+		axios.get("/prescription/getPrescripted", {
+			params: {
+				registerId: rid
+			}
+		}).then(function(resp) {
+			var tr;
+			var list = resp.data;
+			var table = $("#selectedPrescriptions")
+			for (var i = 0; i < list.length; i++) {
+				tr = "<tr><td style='width: 10%;'></td><td style='width: 60%;'>" + list[i] +
+					"</td><td style='width: 30%;'>已提交</td></tr>"
+				table.append($(tr))
+			}
+		})
+		showOverlay()
+	}
+}, 200)
+
+function showOverlay() {
+	var winWidth = window.innerWidth
+	$('.overlay').css({
+		'height': document.scrollingElement.scrollHeight,
+		'width': winWidth - 20
+	});
+	$('.overlay').show();
+}
+
+// 诊毕患者不能再进行诊断
+// $(function() {
+// 	var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
+// 	if (Selectedstatus == 3) {
+// 		setTimeout(function() {
+// 			$("*").prop({
+// 				disabled: true
+// 			})
+// 		}, 300)
+
+// 	}
+// })
+
 
 
 // TODO  诊毕

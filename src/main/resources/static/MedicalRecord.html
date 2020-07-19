@@ -363,14 +363,14 @@
 				},
 				diagnoseType: "", //已绑定，可通过id可获取
 				ChineseDiagnose: {
-					diseaseName: "111",
-					diagnoseDate: "2000-01-01",
-					icd: "1111"
+					// diseaseName: "111",
+					// diagnoseDate: "2000-01-01",
+					// icd: "1111"
 				},
 				WesternDiagnose: {
-					diseaseName: "111",
-					diagnoseDate: "2000-01-01",
-					icd: "1111"
+					// diseaseName: "111",
+					// diagnoseDate: "2000-01-01",
+					// icd: "1111"
 				}
 			},
 			methods: {
@@ -462,7 +462,7 @@
 		$(function() {
 			setTimeout(function() {
 				var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
-				if (Selectedstatus == 2) {
+				if (Selectedstatus == 2|| Selectedstatus == 3) {
 					$("#medicalrecord *").prop({
 						disabled: true
 					})
@@ -474,6 +474,9 @@
 		$(function() {
 			setTimeout(function() {
 				$("#disease-page button").click(function(e) {
+					
+					
+					
 					var btn = e.target
 					var a = $(btn).parent().siblings()
 					var zx = $("#diagnoseType").val();
@@ -481,26 +484,26 @@
 						"<tr><td class='col-sm-1'><div class='checkbox'><input type='checkbox' /></div></td><td class='col-sm-1'>" +
 						a[0].innerHTML + "</td><td class='col-sm-3'>" + a[1].innerHTML +
 						"</td><td class='col-sm-5'></td><td class='col-sm-2'><input type='date' /></td></tr>")
-					if (zx == 1) {
-						var trs=$("#xiyitable").find("tr");
-						for(var i= 1;i<trs.length;i++){
-							$(trs[i]).remove()
+						
+						// 清除内容
+						var trsxiyi=$("#xiyitable").find("tr");
+						var trszhongyi=$("#zhongyitable").find("tr");
+						for(var i= 1;i<trsxiyi.length;i++){
+							$(trsxiyi[i]).remove()
 						}
-						$("#xiyitable").remove("tr")
+						for(var i= 1;i<trszhongyi.length;i++){
+							$(trszhongyi[i]).remove()
+						}
+					if (zx == 1) {
 						$("#xiyitable").append(tr)
 					} else {
-						var trs=$("#zhongyitable").find("tr");
-						for(var i= 1;i<trs.length;i++){
-							$(trs[i]).remove()
-						}
-						$("#zhongyitable").remove("tr")
 						$("#zhongyitable").append(tr);
 					}
 
 					/* 关闭页面 */
 					toggleDisease(a)
 				})
-			}, 500)
+			}, 500)// 为vue预留时间
 
 		})
 

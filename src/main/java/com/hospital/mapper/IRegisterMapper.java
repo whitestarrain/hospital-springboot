@@ -45,9 +45,9 @@ public interface IRegisterMapper {
     public List<Register> getCurrentNoDiagnoseRegister();
 
     /**
-     * 获得所有今天已诊断的记录
+     * 获得所有今天已诊断的记录，包括开药后诊毕的
      * @return 获得所有今天已诊断的记录
      */
-    @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND STATUS = 2")
+    @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND (STATUS = 2 or status = 3)")
     public List<Register> getCurrentDiagnosedRegister();
 }

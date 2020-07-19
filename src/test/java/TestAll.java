@@ -140,4 +140,12 @@ public class TestAll {
         System.out.println(joDrugDetailMapper.getVoDrugDetailById(2));
         prescriptionMapper.doPrescription(209,"2,3");
     }
+
+    @Autowired
+    private IPrescribeMapper prescribeMapper;
+
+    @Test
+    public void test13(){
+        System.out.println(prescribeMapper.getPrescripted(208));
+    }
 }
