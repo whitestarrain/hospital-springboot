@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -56,5 +57,17 @@ public class UserController {
         User user = (User)(session.getAttribute("user"));
         user.setPassword("");
         return user;
+    }
+
+    @RequestMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        try {
+            // 框架会自动补全前面项目路径
+            response.sendRedirect("/login.html");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
