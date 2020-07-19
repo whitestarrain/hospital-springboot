@@ -43,7 +43,7 @@
             WHERE constantitem.id = t1.type) t2,
             constantitem
           WHERE t2.form = constantitem.id) t3
-        WHERE id = 2
+        WHERE id =  #{id}
     </select>
     <select id="getSomVoDrugDetail" resultType="com.hospital.vo.VoDrugDetail">
         SELECT

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.mapper.IVoConsumeInfoMapper">
+    <select id="getConsumeInfo" parameterType="int" resultType="com.hospital.vo.VoConsumeInfo">
+
+    SELECT
+      SUM(price * number) presPrice,
+      presonname NAME,
+      recordnum recordNum,
+      NAME presName,
+      presdate ,
+      STATUS,
+      id
+    FROM
+      (SELECT
+        t4.*,
+        drug.price
+      FROM
+        drug,
+        (SELECT
+          t3.*,
+          drugtempl.number,
+          drugtempl.drugid
+        FROM
+          drugtempl NATURAL
+          JOIN
+            (SELECT
+              *
+            FROM
+              (SELECT
+                id presid,
+                NAME
+              FROM
+                prescription) t1 NATURAL
+              JOIN
+                (SELECT
+                  prescribe.*,
+                  register.name presonname
+                FROM
+                  prescribe,
+                  register
+                WHERE registerid = #{id}
+                  AND presdate = CURDATE()
+                  AND registerid = register.id) t2) t3) t4
+      WHERE drug.id = t4.drugid) t5
+    GROUP BY id
+    </select>
+</mapper>

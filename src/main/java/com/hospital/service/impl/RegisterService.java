@@ -42,8 +42,18 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
+    public Register selectById(int id) {
+        return registerMapper.selectById(id);
+    }
+
+    @Override
     public List<Register> getCurrentNoDiagnoseRegister() {
         return registerMapper.getCurrentNoDiagnoseRegister();
+    }
+
+    @Override
+    public List<Integer> getRegisterIdsByRecordNum(int recordNum) {
+        return registerMapper.getRegisterIdsByRecordNum(recordNum);
     }
 
     @Override

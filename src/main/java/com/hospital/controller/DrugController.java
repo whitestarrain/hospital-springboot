@@ -23,7 +23,7 @@ public class DrugController {
     private IDrugTemplateMapper drugTemplateMapper;
 
     @RequestMapping("/getDrugDetails")
-    public List<VoDrugDetail> getSomVoDrugDetail(){
+    public List<VoDrugDetail> getSomeVoDrugDetail(){
         return voDrugDetailMapper.getSomVoDrugDetail();
     }
 

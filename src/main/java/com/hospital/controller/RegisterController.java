@@ -53,4 +53,14 @@ public class RegisterController {
     public List<Register> getCurrentDiagnosedRegister() {
         return rs.getCurrentDiagnosedRegister();
     }
+
+    @RequestMapping("/getRegisterIdsByRecordNum")
+    public List<Integer> getRegisterIdsByRecordNum(int recordNum){
+        return rs.getRegisterIdsByRecordNum(recordNum);
+    }
+
+    @RequestMapping("/getRegisterById")
+    public Register getRegisterById(int registerId){
+        return rs.selectById(registerId);
+    }
 }

@@ -16,9 +16,18 @@ public interface IRegisterService {
     public int register(Register register);
 
 
+    /**
+     * 根据病历号获得*最近*挂号信息
+     * @param recordNum 病历号
+     * @return *最近*挂号信息
+     */
     public Register getRegisterByMedicalRecord(int recordNum);
+
+    public Register selectById(int id);
 
     public List<Register> getCurrentNoDiagnoseRegister();
 
     public List<Register> getCurrentDiagnosedRegister();
+
+    public List<Integer> getRegisterIdsByRecordNum(int recordNum);
 }

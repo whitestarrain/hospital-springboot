@@ -4,6 +4,7 @@ import com.hospital.domain.Prescription;
 import com.hospital.domain.Register;
 import com.hospital.mapper.*;
 import com.hospital.service.IRegisterService;
+import com.hospital.vo.VoConsumeInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,11 +135,11 @@ public class TestAll {
     }
 
     @Autowired
-    private IVoDrugDetailMapper joDrugDetailMapper;
+    private IVoDrugDetailMapper voDrugDetailMapper;
     @Test
     public void test12(){
-        System.out.println(joDrugDetailMapper.getVoDrugDetailById(2));
-        prescriptionMapper.doPrescription(209,"2,3");
+        System.out.println(voDrugDetailMapper.getVoDrugDetailById(3));
+//        prescriptionMapper.doPrescription(209,"2,3");
     }
 
     @Autowired
@@ -148,4 +149,18 @@ public class TestAll {
     public void test13(){
         System.out.println(prescribeMapper.getPrescripted(208));
     }
+    @Test
+    public void test14(){
+        List<Integer> ids = registerMapper.getRegisterIdsByRecordNum(600628);
+        System.out.println(ids);
+    }
+
+    @Autowired
+    private IVoConsumeInfoMapper voConsumeInfoMapper;
+    @Test
+    public void test15(){
+        List<VoConsumeInfo> consumeInfo = voConsumeInfoMapper.getConsumeInfo(208);
+        System.out.println(consumeInfo);
+    }
+
 }

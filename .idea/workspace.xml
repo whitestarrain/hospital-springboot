@@ -3,13 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="33a7a0e1-f9bb-4b4b-a3bd-7cc587ecb637" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/PrescriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/PrescriptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IPrescriptionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IPrescriptionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DrugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/DrugController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/controller/RegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/mapper/IRegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/MedicalRecord.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/diagnose.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/lib/private/prescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/lib/private/prescription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/prescription.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/prescription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/service/IRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/service/IRegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/service/impl/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/service/impl/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/IVoDrugDetailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/IVoDrugDetailMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/payfee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/payfee.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestAll.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -93,26 +93,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HisSpringBootApplication">
-    <configuration name="TestAll.test10" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hospital" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAll" />
-      <option name="METHOD_NAME" value="test10" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestAll.test11" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hospital" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAll" />
-      <option name="METHOD_NAME" value="test11" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestAll.test12" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hospital" />
       <option name="PACKAGE_NAME" value="" />
@@ -128,6 +108,26 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestAll" />
       <option name="METHOD_NAME" value="test13" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAll.test14" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hospital" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAll" />
+      <option name="METHOD_NAME" value="test14" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestAll.test15" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hospital" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAll" />
+      <option name="METHOD_NAME" value="test15" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,10 +149,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.HisSpringBootApplication" />
-        <item itemvalue="JUnit.TestAll.test13" />
+        <item itemvalue="JUnit.TestAll.test15" />
         <item itemvalue="JUnit.TestAll.test12" />
-        <item itemvalue="JUnit.TestAll.test11" />
-        <item itemvalue="JUnit.TestAll.test10" />
+        <item itemvalue="JUnit.TestAll.test14" />
+        <item itemvalue="JUnit.TestAll.test13" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +189,8 @@
       <workItem from="1595024631735" duration="20200000" />
       <workItem from="1595049859490" duration="24472000" />
       <workItem from="1595081134543" duration="8504000" />
-      <workItem from="1595112938255" duration="13165000" />
+      <workItem from="1595112938255" duration="14930000" />
+      <workItem from="1595138445139" duration="7355000" />
     </task>
     <servers />
   </component>
@@ -201,10 +202,10 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="494" y="225" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.871@0.0.1549.871" timestamp="1595066362537" />
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1595084938718">
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser" timestamp="1595140911229">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1595084938718" />
+    <state x="580" y="112" key="#com.intellij.ide.util.MemberChooser/0.0.1549.871@0.0.1549.871" timestamp="1595140911229" />
     <state x="442" y="352" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1595049889220">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
@@ -221,38 +222,38 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="93" y="93" width="1363" height="686" key="DiffContextDialog/0.0.1549.871@0.0.1549.871" timestamp="1595083211609" />
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1595126669461">
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom" timestamp="1595146466986">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595126669461" />
-    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1595126669461">
+    <state width="1506" height="253" key="GridCell.Tab.0.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595146466986" />
+    <state width="1506" height="253" key="GridCell.Tab.0.center" timestamp="1595146466985">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1595126669461" />
-    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1595126669461">
+    <state width="1506" height="253" key="GridCell.Tab.0.center/0.0.1549.871@0.0.1549.871" timestamp="1595146466985" />
+    <state width="1506" height="253" key="GridCell.Tab.0.left" timestamp="1595146466985">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1595126669461" />
-    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1595126669461">
+    <state width="1506" height="253" key="GridCell.Tab.0.left/0.0.1549.871@0.0.1549.871" timestamp="1595146466985" />
+    <state width="1506" height="253" key="GridCell.Tab.0.right" timestamp="1595146466986">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1595126669461" />
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1595126669462">
+    <state width="1506" height="253" key="GridCell.Tab.0.right/0.0.1549.871@0.0.1549.871" timestamp="1595146466986" />
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom" timestamp="1595146466987">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595126669462" />
-    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1595126669462">
+    <state width="1506" height="253" key="GridCell.Tab.1.bottom/0.0.1549.871@0.0.1549.871" timestamp="1595146466987" />
+    <state width="1506" height="253" key="GridCell.Tab.1.center" timestamp="1595146466986">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1595126669462" />
-    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1595126669462">
+    <state width="1506" height="253" key="GridCell.Tab.1.center/0.0.1549.871@0.0.1549.871" timestamp="1595146466986" />
+    <state width="1506" height="253" key="GridCell.Tab.1.left" timestamp="1595146466986">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1595126669462" />
-    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1595126669462">
+    <state width="1506" height="253" key="GridCell.Tab.1.left/0.0.1549.871@0.0.1549.871" timestamp="1595146466986" />
+    <state width="1506" height="253" key="GridCell.Tab.1.right" timestamp="1595146466986">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1595126669462" />
+    <state width="1506" height="253" key="GridCell.Tab.1.right/0.0.1549.871@0.0.1549.871" timestamp="1595146466986" />
     <state width="1506" height="272" key="GridCell.Tab.2.bottom" timestamp="1594912055868">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
@@ -273,10 +274,10 @@
       <screen x="0" y="0" width="1549" height="871" />
     </state>
     <state x="284" y="78" key="SettingsEditor/0.0.1549.871@0.0.1549.871" timestamp="1594900784796" />
-    <state x="449" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1595113004701">
+    <state x="449" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1595138451592">
       <screen x="0" y="0" width="1549" height="871" />
     </state>
-    <state x="449" y="260" key="com.intellij.ide.util.TipDialog/0.0.1549.871@0.0.1549.871" timestamp="1595113004701" />
+    <state x="449" y="260" key="com.intellij.ide.util.TipDialog/0.0.1549.871@0.0.1549.871" timestamp="1595138451592" />
     <state x="425" y="62" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1594909033102">
       <screen x="0" y="0" width="1549" height="871" />
     </state>

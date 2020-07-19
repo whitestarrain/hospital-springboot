@@ -29,7 +29,7 @@ public interface IRegisterMapper {
     public void InsertRegister(Register register);
 
     /**
-     * 根据病历号获得最近挂号信息
+     * 根据病历号获得*最近*挂号信息
      * @param recordId  病历id
      * @return 挂号信息
      */
@@ -50,4 +50,12 @@ public interface IRegisterMapper {
      */
     @Select("SELECT * FROM register WHERE diagdate = CURDATE() AND (STATUS = 2 or status = 3)")
     public List<Register> getCurrentDiagnosedRegister();
+
+    /**
+     * 根据病历号获得今天的所有挂号id
+     * @param recordNum
+     * @return
+     */
+    @Select("select id from register where medicalrecord = #{recordNum} and diagdate = curdate()")
+    public List<Integer> getRegisterIdsByRecordNum(int recordNum);
 }
