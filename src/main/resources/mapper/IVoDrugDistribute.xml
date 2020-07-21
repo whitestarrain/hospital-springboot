@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.mapper.IVoDrugDistributeMapper">
+    <select id="getVoDrugDistributeByNum"  resultType="com.hospital.vo.VoDrugDistribute">
+      SELECT
+        *
+      FROM
+        (SELECT
+          t4.*,
+          prescription.name presName
+        FROM
+          prescription,
+          (SELECT
+            t3.*,
+            user.name username
+          FROM
+            USER,
+            (SELECT
+              t2.*,
+              drug.name,
+              drug.price
+            FROM
+              drug,
+              (SELECT
+                drugtempl.number,
+                t1.presid,
+                doctid,
+                STATUS,
+                presdate,
+                drugtempl.drugid
+              FROM
+                drugtempl,
+                (SELECT
+                  prescribe.*,
+                  prescription.id presid
+                FROM
+                  prescribe,
+                  prescription
+                WHERE recordNum = #{0}
+                  AND prescribe.name = prescription.NAME) t1
+              WHERE drugtempl.presid = t1.presid) t2
+            WHERE t2.drugid = drug.id) t3
+          WHERE t3.doctid = user.id) t4
+        WHERE prescription.id = t4.presid) t5
+      WHERE presdate = #{1}
+    </select>
+</mapper>

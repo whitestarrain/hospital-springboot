@@ -34,61 +34,62 @@
 		</style>
 	</head>
 	<body>
-		<div style="position: relative;">
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb" style="margin-bottom: 0px;">
-					<li class="breadcrumb-item"><a href="#">主页</a></li>
-					<li class="breadcrumb-item"><a href="#">药房管理</a></li>
-					<li class="breadcrumb-item active" aria-current="page">药房发药</li>
-				</ol>
-			</nav>
-		</div>
-		<div class="container" style="margin: 20px 0px 30px;">
-			<div class="row">
+		<div id="maindiv">
+			<div style="position: relative;">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb" style="margin-bottom: 0px;">
+						<li class="breadcrumb-item"><a href="#">主页</a></li>
+						<li class="breadcrumb-item"><a href="#">药房管理</a></li>
+						<li class="breadcrumb-item active" aria-current="page">药房发药</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="container" style="margin: 20px 0px 30px;">
+				<div class="row">
 
-				<div class="form-group col-md-1">
-					病历号
+					<div class="form-group col-md-1">
+						病历号
+					</div>
+					<div class="form-group col-md-2">
+						<input type="text" class="form-control" id="exampleInputName2" placeholder="病历号" v-model="recordNum">
+					</div>
+					<div class="col-md-1"></div>
+					<div class="form-group col-md-1">
+						时间
+					</div>
+					<div class="form-group col-md-2">
+						<input type="date" class="form-control" id="exampleInputName3" v-model="date">
+					</div>
+					<div class="col-md-3"></div>
+					<button type="submit" class="btn btn-primary col-md-1" v-on:click="getInfo"><span class="glyphicon glyphicon-search"></span>
+						查询</button>
 				</div>
-				<div class="form-group col-md-2">
-					<input type="text" class="form-control" id="exampleInputName2" placeholder="病历号">
-				</div>
-				<div class="col-md-1"></div>
-				<div class="form-group col-md-1">
-					时间
-				</div>
-				<div class="form-group col-md-2">
-					<input type="date" class="form-control" id="exampleInputName3">
-				</div>
-				<div class="col-md-3"></div>
-				<button type="submit" class="btn btn-primary col-md-1"><span class="glyphicon glyphicon-search"></span> 查询</button>
 			</div>
-		</div>
-		<div id="drug-pee-table" style="margin: 0px 20px 0px;">
-			<div class="highlight-bar" style="padding-top: 4px;">
-				<button type="button" @click="confirm()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>发药</button>
+			<div id="drug-pee-table" style="margin: 0px 20px 0px;">
+				<div class="highlight-bar" style="padding-top: 4px;">
+					<button type="button" @click="confirm()" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span>发药</button>
+				</div>
+				<table class="table table-hover">
+					<tr>
+						<td>药品名称</td>
+						<td>单价</td>
+						<td>数量</td>
+						<td>药品状态</td>
+						<td>开立医生</td>
+						<td>处方名称</td>
+						<td>开立时间</td>
+					</tr>
+					<tr v-for="(d) in DrugDistribute">
+						<td> {{d.name}}</td>
+						<td> {{d.price}}</td>
+						<td> {{d.number}}</td>
+						<td> {{d.status==1?'请缴费':d.status == 2?'已缴费':d.status ==3?'已发药' :d.status == 4 ?'已退费':'不明'}}</td>
+						<td> {{d.userName}}</td>
+						<td> {{d.presName}}</td>
+						<td> {{d.presDate}}</td>
+					</tr>
+				</table>
 			</div>
-			<table class="table table-hover">
-				<tr>
-					<td><input type="checkbox" name="" id="" value="" /></td>
-					<td>药品名称</td>
-					<td>单价</td>
-					<td>数量</td>
-					<td>药品状态</td>
-					<td>开立医生</td>
-					<td>处方名称</td>
-					<td>开立时间</td>
-				</tr>
-				<tr v-for="(drug) in drugs">
-					<td><input type="checkbox" name="" id="" value="" /></td>
-					<td>{{drug.drugName}}</td>
-					<td>{{drug.price}}</td>
-					<td>{{drug.number}}</td>
-					<td>{{drug.status}}</td>
-					<td>{{drug.doctor}}</td>
-					<td>{{drug.presName}}</td>
-					<td>{{drug.openDate}}</td>
-				</tr>
-			</table>
 		</div>
 	</body>
 	<link rel="stylesheet" href="./lib/popup/css/htmleaf-demo.css">
@@ -96,5 +97,78 @@
 	<link rel="stylesheet" href="./lib/popup/css/popup.css">
 	<script src="./lib/popup/js/popup.js"></script>
 	<script src="./lib/toastr/toastr.min.js"></script>
-	<script src="./lib/private/distribute_drug.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: "#maindiv",
+			data: {
+				DrugDistribute: [
+
+				],
+				date: "",
+				recordNum: ""
+			},
+			methods: {
+				/* 成功提示 */
+				distribute: function() {
+					var _this = this;
+					axios.get("/prescription/distributeDrug", {
+						params: {
+							recordNum: _this.recordNum,
+							date:_this.date
+						}
+					}).then(function(resp) {
+						toastr["success"]("发药成功!")
+						_this.getInfo()
+					})
+				},
+				confirm: function() {
+					var _this = this;
+					var popup = new Popup({
+						'type': 'submit',
+						'title': '确认',
+						'text': '确认要发药吗？',
+						'cancelbutton': true,
+						'closeCallBack': function() {
+
+						},
+						'submitCallBack': function() {
+							//TODO
+							_this.distribute()
+
+						}
+					})
+				},
+				getInfo: function() {
+					var _this = this;
+					axios.get("/VoDrugDistribute/getVoDrugDistributeByNum", {
+						params: {
+							recordNum: _this.recordNum,
+							date: _this.date
+						}
+					}).then(function(resp) {
+						_this.DrugDistribute = resp.data
+					})
+				}
+			}
+
+		});
+
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-center",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "2000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+	</script>
 </html>

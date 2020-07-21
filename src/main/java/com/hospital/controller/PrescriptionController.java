@@ -83,4 +83,8 @@ public class PrescriptionController {
         prescriptionMapper.pay(registerId,userId,payWay);
         return invoiceMapper.SelectMaxInvoiceNum();
     }
+    @RequestMapping("/distributeDrug")
+    public void distributeDrug(int recordNum){
+        prescribeMapper.distributeDrug(recordNum);
+    }
 }
