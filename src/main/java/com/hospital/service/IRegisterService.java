@@ -32,4 +32,6 @@ public interface IRegisterService {
     public List<Integer> getRegisterIdsByRecordNum(int recordNum);
 
     public int getRegistedNumByDocId(int docId);
+
+    public void quitRegister(int registerId);
 }

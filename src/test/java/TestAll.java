@@ -5,6 +5,7 @@ import com.hospital.domain.Register;
 import com.hospital.mapper.*;
 import com.hospital.service.IRegisterService;
 import com.hospital.vo.VoConsumeInfo;
+import com.hospital.vo.VoRegister;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +170,15 @@ public class TestAll {
 //        System.out.println(invoiceMapper.SelectMaxInvoiceNum());
         int registedNumByDocId = registerMapper.getRegistedNumByDocId(1);
         System.out.println(registedNumByDocId);
+    }
+
+    @Autowired
+    private IVoRegisterMapper IVoRegisterMapper;
+    @Test
+    public void test17(){
+//        List<VoRegister> voRegisterByNum = IVoRegisterMapper.getVoRegisterByNum(600605);
+//        System.out.println(voRegisterByNum);
+        registerMapper.quitRegister(4);
     }
 
 }

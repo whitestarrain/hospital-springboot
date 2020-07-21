@@ -71,4 +71,9 @@ public class RegisterController {
     public int getRegistedNumByDocId(int id){
         return rs.getRegistedNumByDocId(id);
     }
+
+    @RequestMapping("/quitRegister")
+    public void quitRegister(int registerId){
+        rs.quitRegister(registerId);
+    }
 }

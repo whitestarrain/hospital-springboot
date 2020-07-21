@@ -65,4 +65,9 @@ public class RegisterService implements IRegisterService {
     public int getRegistedNumByDocId(int docId) {
         return registerMapper.getRegistedNumByDocId(docId);
     }
+
+    @Override
+    public void quitRegister(int registerId) {
+        registerMapper.quitRegister(registerId);
+    }
 }

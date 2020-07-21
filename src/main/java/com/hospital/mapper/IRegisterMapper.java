@@ -3,6 +3,7 @@ package com.hospital.mapper;
 import com.hospital.domain.Register;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -65,4 +66,7 @@ public interface IRegisterMapper {
      */
     @Select("select count(id) from register where doctorid = #{id} and diagdate = curdate()")
     public int getRegistedNumByDocId(int docId);
+
+    @Update("call cancel_regi(#{registerId})")
+    public void quitRegister(int registerId);
 }
