@@ -139,7 +139,6 @@ new Vue({
 				window.parent.document.getElementById("refreshbtn").click()
 			}, 200) //200毫秒给vue缓冲
 
-			//TODO 上面按钮添加事件
 		},
 		setDiagnoseType: function(a) {
 			var Selectedstatus = window.parent.document.getElementById("Selectedstatus").innerHTML;
